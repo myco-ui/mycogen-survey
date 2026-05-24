@@ -36,6 +36,7 @@ const SPREADSHEET_ID = 'YOUR_SPREADSHEET_ID_HERE';
 const S1_HEADERS = [
   'timestamp',
   'nickname',
+  'email',
   'age',
   'gender',
   'occupation',
@@ -58,6 +59,7 @@ const S1_HEADERS = [
 const S2_HEADERS = [
   'timestamp',
   'nickname',
+  'email',
   'age',
   'gender',
   'source',
@@ -127,6 +129,7 @@ function columnLabel(key) {
   const map = {
     timestamp:         '填寫時間',
     nickname:          '暱稱',
+    email:             '電子信箱',
     age:               '年齡範圍',
     gender:            '生理性別',
     occupation:        '職業',
