@@ -614,6 +614,10 @@
           <label data-i18n="form.nickname"></label>
           <input type="text" data-i18n-placeholder="form.nickname_ph" oninput="s1data.nickname=this.value">
         </div>
+        <div class="form-group" style="flex-basis:100%">
+          <label data-i18n="form.email"></label>
+          <input type="email" data-i18n-placeholder="form.email_ph" oninput="s1data.email=this.value">
+        </div>
         <div class="form-group">
           <label data-i18n="form.age"></label>
           <select onchange="s1data.age=this.value" id="s1-age-sel"></select>
@@ -819,6 +823,10 @@
         <div class="form-group">
           <label data-i18n="form.nickname"></label>
           <input type="text" data-i18n-placeholder="form.nickname_ph" oninput="s2data.nickname=this.value">
+        </div>
+        <div class="form-group" style="flex-basis:100%">
+          <label data-i18n="form.email"></label>
+          <input type="email" data-i18n-placeholder="form.email_ph" oninput="s2data.email=this.value">
         </div>
         <div class="form-group">
           <label data-i18n="form.age"></label>
@@ -1118,7 +1126,8 @@ const T = {
     'star.tap': '點擊星星評分',
     'star.labels': ['', '很差', '還需改進', '一般', '不錯', '非常滿意！'],
 
-    'form.nickname': '暱稱（選填）', 'form.nickname_ph': '您的暱稱',
+    'form.nickname': '暱稱', 'form.nickname_ph': '您的暱稱',
+    'form.email': '電子信箱', 'form.email_ph': 'example@email.com',
     'form.age': '年齡範圍', 'form.gender': '生理性別',
     'form.occupation': '職業類型', 'form.source': '您從哪裡認識我們？',
     'form.extra': '其他想說的話（選填）', 'form.extra_ph': '任何建議、心得或鼓勵都歡迎！',
@@ -1238,7 +1247,8 @@ const T = {
     'star.tap': 'Tap a star to rate',
     'star.labels': ['', 'Poor', 'Needs work', 'Average', 'Good', 'Excellent!'],
 
-    'form.nickname': 'Nickname (optional)', 'form.nickname_ph': 'Your nickname',
+    'form.nickname': 'Nickname', 'form.nickname_ph': 'Your nickname',
+    'form.email': 'Email', 'form.email_ph': 'example@email.com',
     'form.age': 'Age range', 'form.gender': 'Biological sex',
     'form.occupation': 'Occupation', 'form.source': 'How did you find us?',
     'form.extra': 'Anything else to share? (optional)', 'form.extra_ph': 'Suggestions, thoughts, or kind words — all welcome!',
@@ -1405,12 +1415,26 @@ function setNPS(el, key, val) {
 
 // ── Submit S1 ─────────────────────────────────────────────────
 function submitS1() {
+  const errmsg = lang === 'zh' ? '請填寫所有必填欄位（暱稱、電子信箱）' : 'Please fill in all required fields (Nickname, Email)';
+  if (!s1data.nickname || !s1data.nickname.trim()) { alert(errmsg); return; }
+  if (!s1data.email    || !s1data.email.trim())    { alert(errmsg); return; }
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(s1data.email)) {
+    alert(lang === 'zh' ? '請輸入有效的電子信箱格式' : 'Please enter a valid email address');
+    return;
+  }
   sendToSheets({ ...s1data, ...s1Multi });
   showPage('page-s1-thanks');
 }
 
 // ── Submit S2 + 推薦算法 ──────────────────────────────────────
 function submitS2() {
+  const errmsg = lang === 'zh' ? '請填寫所有必填欄位（暱稱、電子信箱）' : 'Please fill in all required fields (Nickname, Email)';
+  if (!s2data.nickname || !s2data.nickname.trim()) { alert(errmsg); return; }
+  if (!s2data.email    || !s2data.email.trim())    { alert(errmsg); return; }
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(s2data.email)) {
+    alert(lang === 'zh' ? '請輸入有效的電子信箱格式' : 'Please enter a valid email address');
+    return;
+  }
   const d = s2data, m = s2Multi;
   let cord = 0, lion = 0, reishi = 0;
 
