@@ -191,7 +191,7 @@
     .path-card { background: var(--white); border: 2px solid var(--border); border-radius: var(--radius); padding: 22px 18px; cursor: pointer; transition: all .25s; margin-bottom: 12px; display: flex; align-items: flex-start; gap: 14px; }
     .path-card:hover { border-color: var(--primary); transform: translateY(-3px); box-shadow: var(--shadow); }
     .path-icon  { font-size: 36px; flex-shrink: 0; }
-    .path-title { font-size: 16px; font-weight: 800; color: var(--text); margin-bottom: 3px; }
+    .path-title { font-size: 18px; font-weight: 800; color: var(--text); margin-bottom: 3px; }
     .path-desc  { font-size: 13px; color: var(--muted); line-height: 1.5; }
     .path-cta   { font-size: 12px; color: var(--primary); font-weight: 700; margin-top: 7px; }
 
@@ -346,7 +346,6 @@
 
     <div class="lang-cards">
       <div class="lang-card" onclick="setLang('zh')">
-        <div class="lang-card-flag">🇹🇼</div>
         <div class="lang-card-body">
           <div class="lang-card-name">繁體中文</div>
           <div class="lang-card-sub">Traditional Chinese</div>
@@ -354,7 +353,6 @@
         <div class="lang-card-arrow">→</div>
       </div>
       <div class="lang-card" onclick="setLang('en')">
-        <div class="lang-card-flag">🇬🇧</div>
         <div class="lang-card-body">
           <div class="lang-card-name">English</div>
           <div class="lang-card-sub">Continue in English</div>
@@ -394,7 +392,7 @@
   </div>
 
   <div class="path-card" onclick="startSurvey(1)">
-    <div class="path-icon">🛍️</div>
+    <div class="path-icon">📃</div>
     <div>
       <div class="path-title" data-i18n="landing.path1.title"></div>
       <div class="path-desc"  data-i18n="landing.path1.desc"></div>
@@ -468,6 +466,36 @@
     </div>
     <button class="btn btn-primary" onclick="s1Next('1b')" data-i18n="nav.next"></button>
     <button class="btn btn-secondary" style="margin-top:8px" onclick="showS1Step(1)" data-i18n="nav.prev"></button>
+  </div>
+
+  <!-- Q1c: 各產品使用細節（動態，每個選到的產品顯示一次） -->
+  <div id="s1-q1c" class="s1-step" style="display:none">
+    <div class="progress-wrap">
+      <div class="progress-label"><span data-i18n="s1.q1c.section"></span><span id="s1-q1c-counter"></span></div>
+      <div class="progress-bar"><div class="progress-fill" style="width:11%"></div></div>
+    </div>
+    <div class="card">
+      <div class="q-label">Question 1 <span style="font-size:10px;background:var(--primary);color:#fff;border-radius:4px;padding:1px 5px" id="s1-q1c-badge"></span></div>
+      <div class="q-title" id="s1-q1c-improvement-title"></div>
+      <div class="q-hint" data-i18n="s1.q1c.hint_multi"></div>
+      <div class="opts-grid" id="s1-q1c-improvement-opts"></div>
+    </div>
+    <div class="card" style="margin-top:0">
+      <div class="q-label" data-i18n="s1.q1c.timing_label"></div>
+      <div class="options" id="s1-q1c-timing-opts"></div>
+    </div>
+    <div class="card" style="margin-top:0">
+      <div class="q-label" data-i18n="s1.q1c.dosage_label"></div>
+      <div class="options" id="s1-q1c-dosage-opts"></div>
+    </div>
+    <div class="card" style="margin-top:0">
+      <div class="q-label" data-i18n="s1.q1c.method_label"></div>
+      <div class="q-hint" data-i18n="s1.q1c.hint_multi"></div>
+      <div class="opts-grid" id="s1-q1c-method-opts"></div>
+      <textarea style="margin-top:12px" id="s1-q1c-method-other" data-i18n-placeholder="s1.q1c.method_other_ph"></textarea>
+    </div>
+    <button class="btn btn-primary" onclick="s1NextProductDetail()" data-i18n="nav.next"></button>
+    <button class="btn btn-secondary" style="margin-top:8px" onclick="s1PrevProductDetail()" data-i18n="nav.prev"></button>
   </div>
 
   <!-- Q2 -->
@@ -611,40 +639,77 @@
         <div class="opt" onclick="selectSingle(this,'s1_repurchase','Not likely')"><div class="opt-icon">🚫</div><div class="opt-text" data-i18n="s1.q7.a4"></div></div>
       </div>
     </div>
-    <button class="btn btn-primary" onclick="s1Next(7)" data-i18n="nav.next"></button>
+    <button class="btn btn-primary" onclick="showS1Step('7b')" data-i18n="nav.next"></button>
     <button class="btn btn-secondary" style="margin-top:8px" onclick="s1Prev(7)" data-i18n="nav.prev"></button>
   </div>
 
-  <!-- Q8 NPS -->
+  <!-- Q7b: 不考慮回購的原因 -->
+  <div id="s1-q7b" class="s1-step" style="display:none">
+    <div class="progress-wrap">
+      <div class="progress-label"><span data-i18n="s1.q7b.section"></span><span>8 / 10</span></div>
+      <div class="progress-bar"><div class="progress-fill" style="width:80%"></div></div>
+    </div>
+    <div class="card">
+      <div class="q-label">Question 7+</div>
+      <div class="q-title" data-i18n="s1.q7b.title"></div>
+      <div class="q-hint" data-i18n="s1.q7b.hint"></div>
+      <div class="opts-grid">
+        <div class="opt-chip" onclick="toggleChip(this,'s1_no_repurchase','Price too high')"><span data-i18n="s1.q7b.r1"></span></div>
+        <div class="opt-chip" onclick="toggleChip(this,'s1_no_repurchase','Effect not obvious')"><span data-i18n="s1.q7b.r2"></span></div>
+        <div class="opt-chip" onclick="toggleChip(this,'s1_no_repurchase','Taste/smell')"><span data-i18n="s1.q7b.r3"></span></div>
+        <div class="opt-chip" onclick="toggleChip(this,'s1_no_repurchase','Found alternative')"><span data-i18n="s1.q7b.r4"></span></div>
+        <div class="opt-chip" onclick="toggleChip(this,'s1_no_repurchase','No longer needed')"><span data-i18n="s1.q7b.r5"></span></div>
+        <div class="opt-chip" onclick="toggleChip(this,'s1_no_repurchase','Budget constraint')"><span data-i18n="s1.q7b.r6"></span></div>
+      </div>
+      <textarea style="margin-top:12px" data-i18n-placeholder="s1.q7b.other_ph" oninput="s1data.s1_no_repurchase_other=this.value"></textarea>
+    </div>
+    <button class="btn btn-primary" onclick="showS1Step(8)" data-i18n="nav.next"></button>
+    <button class="btn btn-secondary" style="margin-top:8px" onclick="showS1Step(7)" data-i18n="nav.prev"></button>
+  </div>
+
+  <!-- Q8: 推薦哪一款 -->
   <div id="s1-q8" class="s1-step" style="display:none">
     <div class="progress-wrap">
-      <div class="progress-label"><span data-i18n="s1.q8.section"></span><span>8 / 9</span></div>
-      <div class="progress-bar"><div class="progress-fill" style="width:88%"></div></div>
+      <div class="progress-label"><span data-i18n="s1.q8.section"></span><span>9 / 10</span></div>
+      <div class="progress-bar"><div class="progress-fill" style="width:90%"></div></div>
     </div>
     <div class="card">
       <div class="q-label">Question 8</div>
       <div class="q-title" data-i18n="s1.q8.title"></div>
-      <div class="q-hint"  data-i18n="s1.q8.hint"></div>
-      <div class="nps-wrap" id="s1-nps">
-        <button class="nps-btn" onclick="setNPS(this,'s1_nps',0)">0</button>
-        <button class="nps-btn" onclick="setNPS(this,'s1_nps',1)">1</button>
-        <button class="nps-btn" onclick="setNPS(this,'s1_nps',2)">2</button>
-        <button class="nps-btn" onclick="setNPS(this,'s1_nps',3)">3</button>
-        <button class="nps-btn" onclick="setNPS(this,'s1_nps',4)">4</button>
-        <button class="nps-btn" onclick="setNPS(this,'s1_nps',5)">5</button>
-        <button class="nps-btn" onclick="setNPS(this,'s1_nps',6)">6</button>
-        <button class="nps-btn" onclick="setNPS(this,'s1_nps',7)">7</button>
-        <button class="nps-btn" onclick="setNPS(this,'s1_nps',8)">8</button>
-        <button class="nps-btn" onclick="setNPS(this,'s1_nps',9)">9</button>
-        <button class="nps-btn" onclick="setNPS(this,'s1_nps',10)">10</button>
+      <div class="options">
+        <div class="opt" data-shroom="cordyceps" onclick="selectSingle(this,'s1_recommend_product','Cordyceps 蟲草')">
+          <div class="opt-icon">🟠</div>
+          <div><div class="opt-text" data-i18n="shroom.cord.name"></div><div class="opt-desc" data-i18n="shroom.cord.tagwhen"></div></div>
+        </div>
+        <div class="opt" data-shroom="lionsmane" onclick="selectSingle(this,'s1_recommend_product',&quot;Lion's Mane 猴頭菇&quot;)">
+          <div class="opt-icon">🔵</div>
+          <div><div class="opt-text" data-i18n="shroom.lion.name"></div><div class="opt-desc" data-i18n="shroom.lion.tagwhen"></div></div>
+        </div>
+        <div class="opt" data-shroom="reishi" onclick="selectSingle(this,'s1_recommend_product','Reishi 靈芝')">
+          <div class="opt-icon">🔴</div>
+          <div><div class="opt-text" data-i18n="shroom.reishi.name"></div><div class="opt-desc" data-i18n="shroom.reishi.tagwhen"></div></div>
+        </div>
+        <div class="opt" onclick="selectSingle(this,'s1_recommend_product','Would not recommend')">
+          <div class="opt-icon">🚫</div>
+          <div><div class="opt-text" data-i18n="s1.q8.no_rec"></div></div>
+        </div>
       </div>
-      <div class="nps-labels">
-        <span data-i18n="s1.q8.nps_lo"></span>
-        <span data-i18n="s1.q8.nps_hi"></span>
+    </div>
+    <div class="card" style="margin-top:0">
+      <div class="q-label" data-i18n="s1.q8.reason_label"></div>
+      <div class="opts-grid">
+        <div class="opt-chip" onclick="toggleChip(this,'s1_recommend_reason','Effective for energy')"><span data-i18n="s1.q8.rr1"></span></div>
+        <div class="opt-chip" onclick="toggleChip(this,'s1_recommend_reason','Effective for sleep')"><span data-i18n="s1.q8.rr2"></span></div>
+        <div class="opt-chip" onclick="toggleChip(this,'s1_recommend_reason','Effective for focus')"><span data-i18n="s1.q8.rr3"></span></div>
+        <div class="opt-chip" onclick="toggleChip(this,'s1_recommend_reason','Effective for stress')"><span data-i18n="s1.q8.rr4"></span></div>
+        <div class="opt-chip" onclick="toggleChip(this,'s1_recommend_reason','Good taste')"><span data-i18n="s1.q8.rr5"></span></div>
+        <div class="opt-chip" onclick="toggleChip(this,'s1_recommend_reason','Easy to use')"><span data-i18n="s1.q8.rr6"></span></div>
+        <div class="opt-chip" onclick="toggleChip(this,'s1_recommend_reason','Natural ingredients')"><span data-i18n="s1.q8.rr7"></span></div>
+        <div class="opt-chip" onclick="toggleChip(this,'s1_recommend_reason','Good value')"><span data-i18n="s1.q8.rr8"></span></div>
       </div>
     </div>
     <button class="btn btn-primary" onclick="s1Next(8)" data-i18n="nav.next"></button>
-    <button class="btn btn-secondary" style="margin-top:8px" onclick="s1Prev(8)" data-i18n="nav.prev"></button>
+    <button class="btn btn-secondary" style="margin-top:8px" onclick="showS1Step('7b')" data-i18n="nav.prev"></button>
   </div>
 
   <!-- Q9 基本資料 -->
@@ -694,7 +759,7 @@
       </div>
     </div>
     <button class="btn btn-primary" onclick="submitS1()" data-i18n="s1.submit"></button>
-    <button class="btn btn-secondary" style="margin-top:8px" onclick="s1Prev(9)" data-i18n="nav.prev"></button>
+    <button class="btn btn-secondary" style="margin-top:8px" onclick="showS1Step(8)" data-i18n="nav.prev"></button>
   </div>
 </div>
 
@@ -960,10 +1025,10 @@ const T = {
 
     'landing.title': '機能性菇菇問卷',
     'landing.subtitle': '填寫問卷，讓我們為您找到最適合的天然機能保健方案 🍄',
-    'landing.path1.title': '我已經購買過 Mycodrops',
+    'landing.path1.title': '已購入 Mycodrops 菇菇滴劑',
     'landing.path1.desc': '分享使用心得，幫助我們持續改善產品，並取得專屬回購優惠資訊。',
     'landing.path1.cta': '→ 購後回饋問卷（約 3 分鐘）',
-    'landing.path2.title': '我想找適合自己的菇',
+    'landing.path2.title': '尋找屬於我的菇',
     'landing.path2.desc': '初次認識 Mycodrops？回答幾個生活問題，讓我們推薦最適合您的機能菇，或邀請您參加 Workshop！',
     'landing.path2.cta': '→ 探索適合我的菇（約 2 分鐘）',
     'landing.anon': '本問卷為匿名收集，僅用於產品改善與個人化推薦。',
@@ -974,7 +1039,7 @@ const T = {
     's1.q2.a1': '不到 1 週', 's1.q2.a2': '1–2 週', 's1.q2.a3': '2–4 週', 's1.q2.a4': '1 個月以上',
     's1.q3.section': '使用頻率', 's1.q3.title': '您的使用頻率大概是？',
     's1.q3.a1': '每天使用', 's1.q3.a2': '一週 4–5 次', 's1.q3.a3': '一週 2–3 次', 's1.q3.a4': '偶爾想到才用',
-    's1.q4.section': '使用效果', 's1.q4.title': '使用後，您有感受到哪些改善？', 's1.q4.hint': '可複選',
+    's1.q4.section': '回購動力', 's1.q4.title': '哪些生活困擾的改善，讓您考慮繼續回購？', 's1.q4.hint': '可複選',
     's1.q4.e1': '⚡ 精力提升', 's1.q4.e2': '😴 更好入睡', 's1.q4.e3': '🧠 專注力提升',
     's1.q4.e4': '🌿 壓力減輕', 's1.q4.e5': '😊 情緒穩定', 's1.q4.e6': '🏋️ 運動表現',
     's1.q4.e7': '🛡️ 免疫感受', 's1.q4.e8': '🤔 尚未明顯感受',
@@ -988,9 +1053,32 @@ const T = {
     's1.q7.section': '回購意願', 's1.q7.title': '您考慮回購 Mycodrops 的可能性？',
     's1.q7.a1': '非常有可能，已在考慮', 's1.q7.a2': '有可能，用完後考慮',
     's1.q7.a3': '需要再觀察效果', 's1.q7.a4': '目前不考慮',
-    's1.q8.section': '推薦意願', 's1.q8.title': '您有多願意把 Mycodrops 推薦給朋友或家人？',
-    's1.q8.hint': '0 = 完全不會，10 = 非常願意', 's1.q8.nps_lo': '不會推薦', 's1.q8.nps_hi': '非常願意推薦',
+    's1.q7b.section': '未回購原因', 's1.q7b.title': '不考慮回購的原因為何？', 's1.q7b.hint': '可複選，或直接跳過',
+    's1.q7b.r1': '💰 價格考量', 's1.q7b.r2': '🤔 效果不夠明顯', 's1.q7b.r3': '😐 口感 / 氣味問題',
+    's1.q7b.r4': '🔄 找到其他替代品', 's1.q7b.r5': '📦 不需繼續補充', 's1.q7b.r6': '💸 預算考量',
+    's1.q7b.other_ph': '其他原因（選填）',
+    's1.q8.section': '推薦意願', 's1.q8.title': '如果要推薦 Mycodrops 給有生活困擾的親友，你會推薦哪一款？',
+    's1.q8.no_rec': '不推薦',
+    's1.q8.reason_label': '推薦原因（可複選）',
+    's1.q8.rr1': '⚡ 提升精力有感', 's1.q8.rr2': '😴 改善睡眠', 's1.q8.rr3': '🧠 專注力提升',
+    's1.q8.rr4': '🌿 舒緩壓力', 's1.q8.rr5': '😋 口感好', 's1.q8.rr6': '✅ 使用方便',
+    's1.q8.rr7': '🌱 天然成分', 's1.q8.rr8': '💰 CP 值高',
     's1.q1b.title': '這幾款中，您最喜歡或最有感的是哪一款？',
+    's1.q1c.section': '產品使用細節',
+    's1.q1c.hint_multi': '可複選',
+    's1.q1c.timing_label': '使用時機',
+    's1.q1c.dosage_label': '使用劑量',
+    's1.q1c.method_label': '攝取方法',
+    's1.q1c.method_other_ph': '其他攝取方式（選填）',
+    's1.q1c.improvement.cord': '您認為使用蟲草後，哪些方面有顯著改善？',
+    's1.q1c.improvement.lion': '您認為使用猴頭菇後，哪些方面有顯著改善？',
+    's1.q1c.improvement.reishi': '您認為使用靈芝後，哪些方面有顯著改善？',
+    's1.q1c.imp1': '⚡ 精力提升', 's1.q1c.imp2': '😴 睡眠改善', 's1.q1c.imp3': '🧠 專注力提升',
+    's1.q1c.imp4': '🌿 壓力減輕', 's1.q1c.imp5': '😊 情緒穩定', 's1.q1c.imp6': '🏋️ 運動表現',
+    's1.q1c.imp7': '🛡️ 免疫感受', 's1.q1c.imp8': '🤔 尚未明顯感受',
+    's1.q1c.t1': '早晨起床後', 's1.q1c.t2': '睡前', 's1.q1c.t3': '餐前', 's1.q1c.t4': '餐後', 's1.q1c.t5': '運動前後',
+    's1.q1c.d1': '1 滴', 's1.q1c.d2': '2 滴', 's1.q1c.d3': '3 滴以上', 's1.q1c.d4': '按建議量',
+    's1.q1c.m1': '直接攝取', 's1.q1c.m2': '加入溫水', 's1.q1c.m3': '加入咖啡或牛奶', 's1.q1c.m4': '加入手搖飲', 's1.q1c.m5': '加入茶飲',
     's1.q9.section': '基本資料', 's1.q9.label': '最後一步', 's1.q9.title': '讓我們更了解您（匿名）',
     's1.submit': '送出問卷 🍄',
 
@@ -1090,10 +1178,10 @@ const T = {
 
     'landing.title': 'Functional Mushroom Survey',
     'landing.subtitle': "Answer a few quick questions and we'll find the right mushroom for you 🍄",
-    'landing.path1.title': "I've already purchased Mycodrops",
+    'landing.path1.title': 'I have purchased Mycodrops',
     'landing.path1.desc': 'Share your experience and help us keep improving — plus get exclusive loyalty offers.',
     'landing.path1.cta': '→ Post-Purchase Feedback (~3 min)',
-    'landing.path2.title': "I'm new and want to find my mushroom",
+    'landing.path2.title': 'Find My Mushroom',
     'landing.path2.desc': "First time discovering Mycodrops? Answer a few lifestyle questions and we'll match you with the right formula — or invite you to a Workshop!",
     'landing.path2.cta': '→ Find My Mushroom (~2 min)',
     'landing.anon': 'This survey is anonymous and used only for product improvement and personalised recommendations.',
@@ -1104,7 +1192,7 @@ const T = {
     's1.q2.a1': 'Less than 1 week', 's1.q2.a2': '1–2 weeks', 's1.q2.a3': '2–4 weeks', 's1.q2.a4': '1+ month',
     's1.q3.section': 'Frequency', 's1.q3.title': 'How often do you use it?',
     's1.q3.a1': 'Every day', 's1.q3.a2': '4–5 times a week', 's1.q3.a3': '2–3 times a week', 's1.q3.a4': 'Occasionally',
-    's1.q4.section': 'Effects', 's1.q4.title': 'What improvements have you noticed?', 's1.q4.hint': 'Select all that apply',
+    's1.q4.section': 'Why Repurchase', 's1.q4.title': 'Which improvements make you want to repurchase?', 's1.q4.hint': 'Select all that apply',
     's1.q4.e1': '⚡ More energy', 's1.q4.e2': '😴 Better sleep', 's1.q4.e3': '🧠 Better focus',
     's1.q4.e4': '🌿 Less stress', 's1.q4.e5': '😊 Mood stability', 's1.q4.e6': '🏋️ Athletic performance',
     's1.q4.e7': '🛡️ Immunity', 's1.q4.e8': '🤔 Nothing noticeable yet',
@@ -1118,9 +1206,33 @@ const T = {
     's1.q7.section': 'Repurchase', 's1.q7.title': 'How likely are you to repurchase Mycodrops?',
     's1.q7.a1': 'Very likely — already thinking about it', 's1.q7.a2': 'Likely — will consider after finishing',
     's1.q7.a3': 'Need to observe more results', 's1.q7.a4': 'Not likely at this time',
-    's1.q8.section': 'Recommendation', 's1.q8.title': 'How likely are you to recommend Mycodrops to a friend or family member?',
-    's1.q8.hint': '0 = Not at all, 10 = Extremely likely', 's1.q8.nps_lo': 'Not at all', 's1.q8.nps_hi': 'Extremely likely',
+    's1.q7b.section': 'Non-repurchase', 's1.q7b.title': 'What might stop you from repurchasing?', 's1.q7b.hint': 'Select all that apply, or skip',
+    's1.q7b.r1': '💰 Price', 's1.q7b.r2': '🤔 Effect not obvious enough', 's1.q7b.r3': '😐 Taste / smell',
+    's1.q7b.r4': '🔄 Found an alternative', 's1.q7b.r5': '📦 No longer need it', 's1.q7b.r6': '💸 Budget',
+    's1.q7b.other_ph': 'Other reason (optional)',
+    's1.q8.section': 'Recommendation',
+    's1.q8.title': 'If you were to recommend Mycodrops to a friend with health concerns, which one would you choose?',
+    's1.q8.no_rec': 'Would not recommend',
+    's1.q8.reason_label': 'Reason for recommending (select all that apply)',
+    's1.q8.rr1': '⚡ Great for energy', 's1.q8.rr2': '😴 Improves sleep', 's1.q8.rr3': '🧠 Boosts focus',
+    's1.q8.rr4': '🌿 Reduces stress', 's1.q8.rr5': '😋 Tastes good', 's1.q8.rr6': '✅ Easy to use',
+    's1.q8.rr7': '🌱 Natural ingredients', 's1.q8.rr8': '💰 Great value',
     's1.q1b.title': 'Of these, which one do you love most or feel the strongest effect from?',
+    's1.q1c.section': 'Product Details',
+    's1.q1c.hint_multi': 'Select all that apply',
+    's1.q1c.timing_label': 'When do you take it?',
+    's1.q1c.dosage_label': 'How many drops?',
+    's1.q1c.method_label': 'How do you take it?',
+    's1.q1c.method_other_ph': 'Other method (optional)',
+    's1.q1c.improvement.cord': 'What improvements have you noticed from Cordyceps?',
+    's1.q1c.improvement.lion': "What improvements have you noticed from Lion's Mane?",
+    's1.q1c.improvement.reishi': 'What improvements have you noticed from Reishi?',
+    's1.q1c.imp1': '⚡ More energy', 's1.q1c.imp2': '😴 Better sleep', 's1.q1c.imp3': '🧠 Better focus',
+    's1.q1c.imp4': '🌿 Less stress', 's1.q1c.imp5': '😊 Mood stability', 's1.q1c.imp6': '🏋️ Athletic performance',
+    's1.q1c.imp7': '🛡️ Immunity', 's1.q1c.imp8': '🤔 Nothing noticeable yet',
+    's1.q1c.t1': 'Morning', 's1.q1c.t2': 'Before bed', 's1.q1c.t3': 'Before meals', 's1.q1c.t4': 'After meals', 's1.q1c.t5': 'Before/after exercise',
+    's1.q1c.d1': '1 drop', 's1.q1c.d2': '2 drops', 's1.q1c.d3': '3+ drops', 's1.q1c.d4': 'As recommended',
+    's1.q1c.m1': 'Directly', 's1.q1c.m2': 'In warm water', 's1.q1c.m3': 'In coffee or milk', 's1.q1c.m4': 'In a drink', 's1.q1c.m5': 'In tea',
     's1.q9.section': 'About You', 's1.q9.label': 'Last step', 's1.q9.title': 'Tell us a bit about yourself (anonymous)',
     's1.submit': 'Submit Feedback 🍄',
 
@@ -1327,16 +1439,23 @@ function showS1Step(n) {
 
 function s1Next(c) {
   if (c === 1) {
-    // 若選了多個產品 → 顯示「最喜歡哪一款」追問
     const products = s1Multi.s1_product || [];
+    productDetailList = products.filter(p => PRODUCT_DETAIL_META[p]);
     if (products.length >= 2) {
       populateQ1bOptions();
       showS1Step('1b');
+    } else if (productDetailList.length > 0) {
+      showProductDetailStep(0);
     } else {
       showS1Step(2);
     }
   } else if (c === '1b') {
-    showS1Step(2);
+    productDetailList = (s1Multi.s1_product || []).filter(p => PRODUCT_DETAIL_META[p]);
+    if (productDetailList.length > 0) {
+      showProductDetailStep(0);
+    } else {
+      showS1Step(2);
+    }
   } else {
     showS1Step(c + 1);
   }
@@ -1344,11 +1463,12 @@ function s1Next(c) {
 
 function s1Prev(c) {
   if (c === 2) {
-    const products = s1Multi.s1_product || [];
-    if (products.length >= 2) {
-      showS1Step('1b');
+    productDetailList = (s1Multi.s1_product || []).filter(p => PRODUCT_DETAIL_META[p]);
+    if (productDetailList.length > 0) {
+      showProductDetailStep(productDetailList.length - 1);
     } else {
-      showS1Step(1);
+      const products = s1Multi.s1_product || [];
+      if (products.length >= 2) { showS1Step('1b'); } else { showS1Step(1); }
     }
   } else if (c > 1) {
     showS1Step(c - 1);
@@ -1382,6 +1502,119 @@ function populateQ1bOptions() {
     };
     opts.appendChild(div);
   });
+}
+
+// ── Product Detail Step (Q1c) ─────────────────────────────────
+let productDetailList = [];   // array of selected product keys, e.g. ['cordyceps','lionsmane']
+let productDetailIndex = 0;
+
+const PRODUCT_DETAIL_META = {
+  'Cordyceps 蟲草':      { key: 'cord',    impKey: 's1.q1c.improvement.cord',    badge: '🟠 蟲草' },
+  "Lion's Mane 猴頭菇":  { key: 'lion',    impKey: 's1.q1c.improvement.lion',    badge: '🔵 猴頭菇' },
+  'Reishi 靈芝':         { key: 'reishi',  impKey: 's1.q1c.improvement.reishi',  badge: '🔴 靈芝' }
+};
+
+function populateProductDetail(productName) {
+  const meta = PRODUCT_DETAIL_META[productName];
+  if (!meta) return;
+  const k = meta.key;
+
+  // Badge & title
+  document.getElementById('s1-q1c-badge').textContent = meta.badge;
+  document.getElementById('s1-q1c-improvement-title').textContent = t(meta.impKey);
+  document.getElementById('s1-q1c-counter').textContent = (productDetailIndex + 1) + ' / ' + productDetailList.length;
+
+  // Improvement options (multi-select chips)
+  const impOpts = document.getElementById('s1-q1c-improvement-opts');
+  impOpts.innerHTML = '';
+  const impValues = ['Energy boost','Better sleep','Better focus','Less stress','Mood stability','Athletic performance','Immunity','Not yet noticeable'];
+  const impKeys   = ['s1.q1c.imp1','s1.q1c.imp2','s1.q1c.imp3','s1.q1c.imp4','s1.q1c.imp5','s1.q1c.imp6','s1.q1c.imp7','s1.q1c.imp8'];
+  const savedImp  = s1Multi[k + '_improvement'] || [];
+  impValues.forEach((v, i) => {
+    const chip = document.createElement('div');
+    chip.className = 'opt-chip' + (savedImp.includes(v) ? ' selected' : '');
+    chip.innerHTML = '<span>' + t(impKeys[i]) + '</span>';
+    chip.onclick = () => toggleChip(chip, k + '_improvement', v);
+    impOpts.appendChild(chip);
+  });
+
+  // Timing options (single select)
+  const timingOpts = document.getElementById('s1-q1c-timing-opts');
+  timingOpts.innerHTML = '';
+  const timingValues = ['Morning','Before bed','Before meals','After meals','Before/after exercise'];
+  const timingKeys   = ['s1.q1c.t1','s1.q1c.t2','s1.q1c.t3','s1.q1c.t4','s1.q1c.t5'];
+  const savedTiming  = s1data[k + '_timing'] || '';
+  timingValues.forEach((v, i) => {
+    const opt = document.createElement('div');
+    opt.className = 'opt' + (savedTiming === v ? ' selected' : '');
+    opt.innerHTML = '<div class="opt-text">' + t(timingKeys[i]) + '</div>';
+    opt.onclick = () => { timingOpts.querySelectorAll('.opt').forEach(o => o.classList.remove('selected')); opt.classList.add('selected'); s1data[k + '_timing'] = v; };
+    timingOpts.appendChild(opt);
+  });
+
+  // Dosage options (single select)
+  const dosageOpts = document.getElementById('s1-q1c-dosage-opts');
+  dosageOpts.innerHTML = '';
+  const dosageValues = ['1 drop','2 drops','3+ drops','As recommended'];
+  const dosageKeys   = ['s1.q1c.d1','s1.q1c.d2','s1.q1c.d3','s1.q1c.d4'];
+  const savedDosage  = s1data[k + '_dosage'] || '';
+  dosageValues.forEach((v, i) => {
+    const opt = document.createElement('div');
+    opt.className = 'opt' + (savedDosage === v ? ' selected' : '');
+    opt.innerHTML = '<div class="opt-text">' + t(dosageKeys[i]) + '</div>';
+    opt.onclick = () => { dosageOpts.querySelectorAll('.opt').forEach(o => o.classList.remove('selected')); opt.classList.add('selected'); s1data[k + '_dosage'] = v; };
+    dosageOpts.appendChild(opt);
+  });
+
+  // Method options (multi-select chips)
+  const methodOpts = document.getElementById('s1-q1c-method-opts');
+  methodOpts.innerHTML = '';
+  const methodValues = ['Directly','In warm water','In coffee or milk','In a drink','In tea'];
+  const methodKeys   = ['s1.q1c.m1','s1.q1c.m2','s1.q1c.m3','s1.q1c.m4','s1.q1c.m5'];
+  const savedMethod  = s1Multi[k + '_method'] || [];
+  methodValues.forEach((v, i) => {
+    const chip = document.createElement('div');
+    chip.className = 'opt-chip' + (savedMethod.includes(v) ? ' selected' : '');
+    chip.innerHTML = '<span>' + t(methodKeys[i]) + '</span>';
+    chip.onclick = () => toggleChip(chip, k + '_method', v);
+    methodOpts.appendChild(chip);
+  });
+
+  // Method other textarea
+  const otherTA = document.getElementById('s1-q1c-method-other');
+  otherTA.value = s1data[k + '_method_other'] || '';
+  otherTA.oninput = () => { s1data[k + '_method_other'] = otherTA.value; };
+
+  // Apply i18n to new elements
+  applyTranslations();
+}
+
+function showProductDetailStep(index) {
+  productDetailIndex = index;
+  populateProductDetail(productDetailList[index]);
+  showS1Step('1c');
+}
+
+function s1NextProductDetail() {
+  if (productDetailIndex < productDetailList.length - 1) {
+    showProductDetailStep(productDetailIndex + 1);
+  } else {
+    showS1Step(2);
+  }
+}
+
+function s1PrevProductDetail() {
+  if (productDetailIndex > 0) {
+    showProductDetailStep(productDetailIndex - 1);
+  } else {
+    // Go back to Q1b (if shown) or Q1
+    const products = s1Multi.s1_product || [];
+    if (products.length >= 2) {
+      showS1Step('1b');
+    } else {
+      showS1Step(1);
+    }
+  }
 }
 
 // ── Survey 2 ──────────────────────────────────────────────────
