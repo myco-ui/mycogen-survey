@@ -164,13 +164,13 @@
     .star-label { font-size: 12px; color: var(--muted); margin-top: 2px; }
 
     /* ─── 文字輸入 ─── */
-    textarea, input[type="text"], select {
+    textarea, input[type="email"], input[type="text"], select {
       width: 100%; padding: 11px 13px; border: 2px solid var(--border);
       border-radius: var(--radius); font-size: 15px; color: var(--text);
       background: var(--white); font-family: inherit; outline: none;
       transition: border-color .2s; resize: vertical;
     }
-    textarea:focus, input:focus, select:focus { border-color: var(--primary); }
+    textarea:focus, input[type="email"]:focus, input[type="text"]:focus, select:focus { border-color: var(--primary); }
     textarea { min-height: 80px; }
     select { appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%237A7068' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 12px center; padding-right: 36px; }
 
@@ -269,6 +269,36 @@
       display: block;
       width: 200px;
       height: auto;
+    }
+
+    /* ─── 電子報勾選框 ─── */
+    .newsletter-wrap {
+      display: flex; align-items: flex-start; gap: 10px;
+      padding: 12px 14px; border: 2px solid var(--border);
+      border-radius: var(--radius); cursor: pointer;
+      background: var(--white); margin-top: 10px;
+      transition: border-color .2s;
+    }
+    .newsletter-wrap:has(input:checked) { border-color: var(--primary); background: #F0EBF4; }
+    .newsletter-wrap input[type="checkbox"] {
+      width: 18px; height: 18px; min-width: 18px; margin-top: 1px;
+      accent-color: var(--primary); cursor: pointer;
+    }
+    .newsletter-label { font-size: 13px; color: var(--text); line-height: 1.5; }
+
+    /* ─── 結果頁次要推薦 ─── */
+    .result-sec-item {
+      padding: 12px 0; border-bottom: 1px solid var(--border);
+    }
+    .result-sec-item:last-child { border-bottom: none; }
+    .result-bundle-card {
+      background: linear-gradient(135deg, #F5F0F5, #E8E0F0);
+      border: 2px solid var(--primary); border-radius: var(--radius);
+      padding: 22px 20px; text-align: center; margin-bottom: 14px;
+    }
+    .result-buy-mini {
+      padding: 7px 14px !important; font-size: 12px !important;
+      width: auto !important; display: inline-block !important;
     }
 
     /* ─── 菇類圖片英雄區 ─── */
@@ -421,6 +451,23 @@
       </div>
     </div>
     <button class="btn btn-primary" onclick="s1Next(1)" data-i18n="nav.next"></button>
+  </div>
+
+  <!-- Q1b: 多選產品後追問最愛款 -->
+  <div id="s1-q1b" class="s1-step" style="display:none">
+    <div class="progress-wrap">
+      <div class="progress-label"><span data-i18n="s1.q1.section"></span><span>1 / 9</span></div>
+      <div class="progress-bar"><div class="progress-fill" style="width:11%"></div></div>
+    </div>
+    <div class="card">
+      <div class="q-label">Question 1 <span style="font-size:10px;background:var(--primary);color:#fff;border-radius:4px;padding:1px 5px">+</span></div>
+      <div class="q-title" data-i18n="s1.q1b.title"></div>
+      <div class="options" id="s1-q1b-opts">
+        <!-- 由 JS 根據 Q1 選擇動態填入 -->
+      </div>
+    </div>
+    <button class="btn btn-primary" onclick="s1Next('1b')" data-i18n="nav.next"></button>
+    <button class="btn btn-secondary" style="margin-top:8px" onclick="showS1Step(1)" data-i18n="nav.prev"></button>
   </div>
 
   <!-- Q2 -->
@@ -609,35 +656,41 @@
     <div class="card">
       <div class="q-label" data-i18n="s1.q9.label"></div>
       <div class="q-title" data-i18n="s1.q9.title"></div>
-      <div class="form-row" style="margin-top:14px">
+      <div style="margin-top:14px">
         <div class="form-group">
           <label data-i18n="form.nickname"></label>
           <input type="text" data-i18n-placeholder="form.nickname_ph" oninput="s1data.nickname=this.value">
         </div>
-        <div class="form-group" style="flex-basis:100%">
+        <div class="form-group">
           <label data-i18n="form.email"></label>
           <input type="email" data-i18n-placeholder="form.email_ph" oninput="s1data.email=this.value">
         </div>
-        <div class="form-group">
-          <label data-i18n="form.age"></label>
-          <select onchange="s1data.age=this.value" id="s1-age-sel"></select>
+        <div class="form-row">
+          <div class="form-group">
+            <label data-i18n="form.age"></label>
+            <select onchange="s1data.age=this.value" id="s1-age-sel"></select>
+          </div>
+          <div class="form-group">
+            <label data-i18n="form.gender"></label>
+            <select onchange="s1data.gender=this.value" id="s1-gender-sel"></select>
+          </div>
+          <div class="form-group">
+            <label data-i18n="form.occupation"></label>
+            <select onchange="s1data.occupation=this.value" id="s1-occ-sel"></select>
+          </div>
         </div>
         <div class="form-group">
-          <label data-i18n="form.gender"></label>
-          <select onchange="s1data.gender=this.value" id="s1-gender-sel"></select>
+          <label data-i18n="form.source"></label>
+          <select onchange="s1data.source=this.value" id="s1-src-sel"></select>
         </div>
         <div class="form-group">
-          <label data-i18n="form.occupation"></label>
-          <select onchange="s1data.occupation=this.value" id="s1-occ-sel"></select>
+          <label data-i18n="form.extra"></label>
+          <textarea data-i18n-placeholder="form.extra_ph" oninput="s1data.s1_extra=this.value"></textarea>
         </div>
-      </div>
-      <div class="form-group">
-        <label data-i18n="form.source"></label>
-        <select onchange="s1data.source=this.value" id="s1-src-sel"></select>
-      </div>
-      <div class="form-group">
-        <label data-i18n="form.extra"></label>
-        <textarea data-i18n-placeholder="form.extra_ph" oninput="s1data.s1_extra=this.value"></textarea>
+        <label class="newsletter-wrap">
+          <input type="checkbox" onchange="s1data.newsletter=this.checked">
+          <span class="newsletter-label" data-i18n="form.newsletter"></span>
+        </label>
       </div>
     </div>
     <button class="btn btn-primary" onclick="submitS1()" data-i18n="s1.submit"></button>
@@ -772,20 +825,22 @@
     <div class="card">
       <div class="q-label">Question 4</div>
       <div class="q-title" data-i18n="s2.q4.title"></div>
+      <div class="q-hint" data-i18n="s2.q4.hint"></div>
       <div class="options">
-        <div class="opt" onclick="selectSingle(this,'s2_goal','More energy')">
+        <div class="opt" onclick="toggleChip(this,'s2_goal','More energy')">
           <div class="opt-icon">⚡</div><div class="opt-text" data-i18n="s2.q4.a1"></div>
         </div>
-        <div class="opt" onclick="selectSingle(this,'s2_goal','Sharper focus')">
+        <div class="opt" onclick="toggleChip(this,'s2_goal','Sharper focus')">
           <div class="opt-icon">🧠</div><div class="opt-text" data-i18n="s2.q4.a2"></div>
         </div>
-        <div class="opt" onclick="selectSingle(this,'s2_goal','Better sleep')">
+        <div class="opt" onclick="toggleChip(this,'s2_goal','Better sleep')">
           <div class="opt-icon">🌙</div><div class="opt-text" data-i18n="s2.q4.a3"></div>
         </div>
-        <div class="opt" onclick="selectSingle(this,'s2_goal','Less stress')">
+        <div class="opt" onclick="toggleChip(this,'s2_goal','Less stress')">
           <div class="opt-icon">🌿</div><div class="opt-text" data-i18n="s2.q4.a4"></div>
         </div>
       </div>
+      <textarea style="margin-top:12px" data-i18n-placeholder="s2.q4.other_ph" oninput="s2data.s2_goal_other=this.value"></textarea>
     </div>
     <button class="btn btn-primary" onclick="s2Next(4)" data-i18n="nav.next"></button>
     <button class="btn btn-secondary" style="margin-top:8px" onclick="s2Prev(4)" data-i18n="nav.prev"></button>
@@ -819,27 +874,33 @@
     <div class="card">
       <div class="q-label" data-i18n="s1.q9.label"></div>
       <div class="q-title" data-i18n="s1.q9.title"></div>
-      <div class="form-row" style="margin-top:14px">
+      <div style="margin-top:14px">
         <div class="form-group">
           <label data-i18n="form.nickname"></label>
           <input type="text" data-i18n-placeholder="form.nickname_ph" oninput="s2data.nickname=this.value">
         </div>
-        <div class="form-group" style="flex-basis:100%">
+        <div class="form-group">
           <label data-i18n="form.email"></label>
           <input type="email" data-i18n-placeholder="form.email_ph" oninput="s2data.email=this.value">
         </div>
-        <div class="form-group">
-          <label data-i18n="form.age"></label>
-          <select onchange="s2data.age=this.value" id="s2-age-sel"></select>
-        </div>
-        <div class="form-group">
-          <label data-i18n="form.gender"></label>
-          <select onchange="s2data.gender=this.value" id="s2-gender-sel"></select>
+        <div class="form-row">
+          <div class="form-group">
+            <label data-i18n="form.age"></label>
+            <select onchange="s2data.age=this.value" id="s2-age-sel"></select>
+          </div>
+          <div class="form-group">
+            <label data-i18n="form.gender"></label>
+            <select onchange="s2data.gender=this.value" id="s2-gender-sel"></select>
+          </div>
         </div>
         <div class="form-group">
           <label data-i18n="form.source"></label>
           <select onchange="s2data.source=this.value" id="s2-src-sel"></select>
         </div>
+        <label class="newsletter-wrap">
+          <input type="checkbox" onchange="s2data.newsletter=this.checked">
+          <span class="newsletter-label" data-i18n="form.newsletter"></span>
+        </label>
       </div>
     </div>
     <button class="btn btn-primary" onclick="submitS2()" data-i18n="s2.submit"></button>
@@ -849,145 +910,20 @@
 
 
 <!-- ============================================================
-     PAGE: RESULT — 蟲草 Cordyceps
+     PAGE: RESULT — 動態複選推薦結果頁 (問卷二)
 ============================================================ -->
-<div id="page-result-cordyceps" class="page">
-  <div class="brand-header" style="padding-top:16px"><div class="brand-logo" data-i18n="result.recommended"></div></div>
-  <div class="result-photo-wrap">
-    <img src="images/cordyceps.png" alt="Cordyceps" class="result-photo"
-         onerror="this.style.display='none'">
-    <div class="result-photo-overlay">
-      <div class="result-photo-name" data-i18n="shroom.cord.name"></div>
-      <div class="result-photo-name-en">Cordyceps militaris</div>
-      <div class="result-photo-tag" data-i18n="shroom.cord.tag"></div>
-    </div>
+<div id="page-result" class="page">
+  <div class="brand-header" style="padding-top:16px">
+    <div class="brand-logo" data-i18n="result.recommended"></div>
   </div>
-  <div class="result-match" data-i18n="result.match_prefix"><strong id="r-cord-pct"></strong></div>
-  <div class="card">
-    <div class="section-title" data-i18n="result.why"></div>
-    <ul class="benefit-list">
-      <li>🔋 <span data-i18n="shroom.cord.b1"></span></li>
-      <li>💪 <span data-i18n="shroom.cord.b2"></span></li>
-      <li>🛡️ <span data-i18n="shroom.cord.b3"></span></li>
-      <li>⚡ <span data-i18n="shroom.cord.b4"></span></li>
-    </ul>
-    <div class="usage-card">
-      <h4 data-i18n="result.when"></h4>
-      <p data-i18n="shroom.cord.usage"></p>
-    </div>
-    <div class="product-badges">
-      <span class="badge" data-i18n="badge.sugar"></span>
-      <span class="badge" data-i18n="badge.caffeine"></span>
-      <span class="badge" data-i18n="badge.vegan"></span>
-      <span class="badge" data-i18n="badge.tw"></span>
-    </div>
-    <p style="font-size:12px;color:var(--muted);margin-top:8px" data-i18n="result.weeks"></p>
-  </div>
-  <div class="card">
-    <div class="section-title" data-i18n="result.forwhom"></div>
-    <p style="font-size:13px;color:var(--text);line-height:1.7" data-i18n="shroom.cord.audience"></p>
-  </div>
-  <div class="btn-row">
-    <a data-link="buy_cord" href="#" target="_blank" class="btn btn-cordyceps" data-i18n="cta.buy.cord"></a>
-    <a data-link="line" href="#"        target="_blank" class="btn btn-line"      data-i18n="cta.line"></a>
-    <a data-link="workshop" href="#"             target="_blank" class="btn btn-workshop"  data-i18n="cta.workshop"></a>
-  </div>
-  <button class="btn btn-secondary" style="margin-top:10px" onclick="showPage('page-landing')" data-i18n="result.retake"></button>
-</div>
-
-
-<!-- ============================================================
-     PAGE: RESULT — 猴頭菇 Lion's Mane
-============================================================ -->
-<div id="page-result-lionsmane" class="page">
-  <div class="brand-header" style="padding-top:16px"><div class="brand-logo" data-i18n="result.recommended"></div></div>
-  <div class="result-photo-wrap">
-    <img src="images/lionsmane.png" alt="Lion's Mane" class="result-photo"
-         onerror="this.style.display='none'">
-    <div class="result-photo-overlay">
-      <div class="result-photo-name" data-i18n="shroom.lion.name"></div>
-      <div class="result-photo-name-en">Lion's Mane · Hericium erinaceus</div>
-      <div class="result-photo-tag" data-i18n="shroom.lion.tag"></div>
-    </div>
-  </div>
-  <div class="result-match" data-i18n="result.match_prefix"><strong id="r-lion-pct"></strong></div>
-  <div class="card">
-    <div class="section-title" data-i18n="result.why"></div>
-    <ul class="benefit-list">
-      <li>🧠 <span data-i18n="shroom.lion.b1"></span></li>
-      <li>📚 <span data-i18n="shroom.lion.b2"></span></li>
-      <li>🌈 <span data-i18n="shroom.lion.b3"></span></li>
-      <li>💼 <span data-i18n="shroom.lion.b4"></span></li>
-    </ul>
-    <div class="usage-card">
-      <h4 data-i18n="result.when"></h4>
-      <p data-i18n="shroom.lion.usage"></p>
-    </div>
-    <div class="product-badges">
-      <span class="badge" data-i18n="badge.sugar"></span>
-      <span class="badge" data-i18n="badge.caffeine"></span>
-      <span class="badge" data-i18n="badge.vegan"></span>
-      <span class="badge" data-i18n="badge.tw"></span>
-    </div>
-    <p style="font-size:12px;color:var(--muted);margin-top:8px" data-i18n="result.weeks"></p>
-  </div>
-  <div class="card">
-    <div class="section-title" data-i18n="result.forwhom"></div>
-    <p style="font-size:13px;color:var(--text);line-height:1.7" data-i18n="shroom.lion.audience"></p>
-  </div>
-  <div class="btn-row">
-    <a data-link="buy_lion" href="#" target="_blank" class="btn btn-lionsmane" data-i18n="cta.buy.lion"></a>
-    <a data-link="line" href="#"        target="_blank" class="btn btn-line"     data-i18n="cta.line"></a>
-    <a data-link="workshop" href="#"             target="_blank" class="btn btn-workshop" data-i18n="cta.workshop"></a>
-  </div>
-  <button class="btn btn-secondary" style="margin-top:10px" onclick="showPage('page-landing')" data-i18n="result.retake"></button>
-</div>
-
-
-<!-- ============================================================
-     PAGE: RESULT — 靈芝 Reishi
-============================================================ -->
-<div id="page-result-reishi" class="page">
-  <div class="brand-header" style="padding-top:16px"><div class="brand-logo" data-i18n="result.recommended"></div></div>
-  <div class="result-photo-wrap">
-    <img src="images/reishi.png" alt="Reishi" class="result-photo"
-         onerror="this.style.display='none'">
-    <div class="result-photo-overlay">
-      <div class="result-photo-name" data-i18n="shroom.reishi.name"></div>
-      <div class="result-photo-name-en">Reishi · Ganoderma lucidum</div>
-      <div class="result-photo-tag" data-i18n="shroom.reishi.tag"></div>
-    </div>
-  </div>
-  <div class="result-match" data-i18n="result.match_prefix"><strong id="r-reishi-pct"></strong></div>
-  <div class="card">
-    <div class="section-title" data-i18n="result.why"></div>
-    <ul class="benefit-list">
-      <li>🌙 <span data-i18n="shroom.reishi.b1"></span></li>
-      <li>🌿 <span data-i18n="shroom.reishi.b2"></span></li>
-      <li>😊 <span data-i18n="shroom.reishi.b3"></span></li>
-      <li>🛡️ <span data-i18n="shroom.reishi.b4"></span></li>
-    </ul>
-    <div class="usage-card">
-      <h4 data-i18n="result.when"></h4>
-      <p data-i18n="shroom.reishi.usage"></p>
-    </div>
-    <div class="product-badges">
-      <span class="badge" data-i18n="badge.sugar"></span>
-      <span class="badge" data-i18n="badge.caffeine"></span>
-      <span class="badge" data-i18n="badge.vegan"></span>
-      <span class="badge" data-i18n="badge.tw"></span>
-    </div>
-    <p style="font-size:12px;color:var(--muted);margin-top:8px" data-i18n="result.weeks"></p>
-  </div>
-  <div class="card">
-    <div class="section-title" data-i18n="result.forwhom"></div>
-    <p style="font-size:13px;color:var(--text);line-height:1.7" data-i18n="shroom.reishi.audience"></p>
-  </div>
-  <div class="btn-row">
-    <a data-link="buy_reishi" href="#"  target="_blank" class="btn btn-reishi"   data-i18n="cta.buy.reishi"></a>
-    <a data-link="line" href="#"      target="_blank" class="btn btn-line"    data-i18n="cta.line"></a>
-    <a data-link="workshop" href="#"          target="_blank" class="btn btn-workshop" data-i18n="cta.workshop"></a>
-  </div>
+  <!-- 主推薦（由 JS 動態填入） -->
+  <div id="result-primary-wrap"></div>
+  <!-- 次要推薦（由 JS 動態填入） -->
+  <div id="result-secondary-wrap"></div>
+  <!-- 套組推薦（由 JS 動態填入） -->
+  <div id="result-bundle-wrap"></div>
+  <!-- 行動按鈕 -->
+  <div class="btn-row" id="result-action-btns"></div>
   <button class="btn btn-secondary" style="margin-top:10px" onclick="showPage('page-landing')" data-i18n="result.retake"></button>
 </div>
 
@@ -1054,6 +990,7 @@ const T = {
     's1.q7.a3': '需要再觀察效果', 's1.q7.a4': '目前不考慮',
     's1.q8.section': '推薦意願', 's1.q8.title': '您有多願意把 Mycodrops 推薦給朋友或家人？',
     's1.q8.hint': '0 = 完全不會，10 = 非常願意', 's1.q8.nps_lo': '不會推薦', 's1.q8.nps_hi': '非常願意推薦',
+    's1.q1b.title': '這幾款中，您最喜歡或最有感的是哪一款？',
     's1.q9.section': '基本資料', 's1.q9.label': '最後一步', 's1.q9.title': '讓我們更了解您（匿名）',
     's1.submit': '送出問卷 🍄',
 
@@ -1071,9 +1008,10 @@ const T = {
     's2.q3.section': '睡眠品質', 's2.q3.title': '你的睡眠品質大概是？',
     's2.q3.a1': '很好，幾乎沒困擾', 's2.q3.a2': '還可以，但有時難入睡',
     's2.q3.a3': '品質不佳，常淺眠或早醒', 's2.q3.a4': '長期失眠，是困擾主因',
-    's2.q4.section': '期待改變', 's2.q4.title': '你最期待哪一種改變？',
+    's2.q4.section': '期待改變', 's2.q4.title': '你最期待哪一種改變？', 's2.q4.hint': '可複選',
     's2.q4.a1': '提升體力與精神，不再疲憊', 's2.q4.a2': '腦袋更清晰，工作學習更有效率',
     's2.q4.a3': '睡眠改善，早上起來有精神', 's2.q4.a4': '舒緩壓力、情緒更穩定',
+    's2.q4.other_ph': '其他期待的改變？（選填）',
     's2.q5.section': '保健習慣', 's2.q5.title': '你目前有在使用保健品嗎？',
     's2.q5.a1': '有，規律使用（每天）', 's2.q5.a2': '偶爾補充', 's2.q5.a3': '沒有，是第一次考慮',
     's2.q6.section': '基本資料',
@@ -1108,8 +1046,13 @@ const T = {
 
     'result.recommended': 'Mycogen 為您推薦', 'result.why': '為什麼是這一款？',
     'result.match_prefix': '根據您的回答，最適合您的是',
+    'result.match_label': '吻合度',
     'result.when': '🕐 建議使用時機', 'result.weeks': '建議持續使用 2–4 週以感受較顯著效果',
     'result.forwhom': '你是哪種族群？', 'result.retake': '重新填寫',
+    'result.also_good': '✨ 也很適合你的菇',
+    'result.bundle.title': '三菇全效套組',
+    'result.bundle.desc': '根據你的回答，三種機能菇都對你有幫助！選擇三菇套組，全方位照顧體力、腦力與睡眠。',
+    'result.bundle.cta': '🛒 查看三菇全效套組',
 
     'thanks.title': '感謝您的寶貴回饋！',
     'thanks.desc': '您的意見是我們持續進步的動力。\n每一滴 Mycodrops，都凝聚著對自然與健康的用心。',
@@ -1121,6 +1064,7 @@ const T = {
     'cta.buy.cord':   '🛒 立即購買 蟲草滴劑',
     'cta.buy.lion':   '🛒 立即購買 猴頭菇滴劑',
     'cta.buy.reishi': '🛒 立即購買 靈芝滴劑',
+    'cta.buy.short': '購買 →',
 
     'badge.sugar': '零糖', 'badge.caffeine': '無咖啡因', 'badge.vegan': '純素', 'badge.tw': '100% 台灣製造',
     'star.tap': '點擊星星評分',
@@ -1131,6 +1075,7 @@ const T = {
     'form.age': '年齡範圍', 'form.gender': '生理性別',
     'form.occupation': '職業類型', 'form.source': '您從哪裡認識我們？',
     'form.extra': '其他想說的話（選填）', 'form.extra_ph': '任何建議、心得或鼓勵都歡迎！',
+    'form.newsletter': '願意收到真菌保養相關的電子報 🍄',
 
     'form.age_opts': ['請選擇','18 歲以下','18–24 歲','25–34 歲','35–44 歲','45–54 歲','55 歲以上'],
     'form.gender_opts': ['請選擇','女性','男性','非二元 / 其他','不願透露'],
@@ -1175,6 +1120,7 @@ const T = {
     's1.q7.a3': 'Need to observe more results', 's1.q7.a4': 'Not likely at this time',
     's1.q8.section': 'Recommendation', 's1.q8.title': 'How likely are you to recommend Mycodrops to a friend or family member?',
     's1.q8.hint': '0 = Not at all, 10 = Extremely likely', 's1.q8.nps_lo': 'Not at all', 's1.q8.nps_hi': 'Extremely likely',
+    's1.q1b.title': 'Of these, which one do you love most or feel the strongest effect from?',
     's1.q9.section': 'About You', 's1.q9.label': 'Last step', 's1.q9.title': 'Tell us a bit about yourself (anonymous)',
     's1.submit': 'Submit Feedback 🍄',
 
@@ -1192,9 +1138,10 @@ const T = {
     's2.q3.section': 'Sleep', 's2.q3.title': 'How would you describe your sleep quality?',
     's2.q3.a1': 'Great — rarely any issues', 's2.q3.a2': 'OK, but sometimes hard to fall asleep',
     's2.q3.a3': 'Poor — light sleep or waking early', 's2.q3.a4': 'Chronic insomnia — major concern',
-    's2.q4.section': 'Goals', 's2.q4.title': 'What change are you most hoping for?',
+    's2.q4.section': 'Goals', 's2.q4.title': 'What changes are you hoping for?', 's2.q4.hint': 'Select all that apply',
     's2.q4.a1': 'More energy — no more feeling drained', 's2.q4.a2': 'Sharper thinking and better productivity',
     's2.q4.a3': 'Better sleep — wake up refreshed', 's2.q4.a4': 'Less stress and more emotional balance',
+    's2.q4.other_ph': 'Other goals you\'re hoping for... (optional)',
     's2.q5.section': 'Supplements', 's2.q5.title': 'Do you currently take health supplements?',
     's2.q5.a1': 'Yes, regularly (daily)', 's2.q5.a2': 'Occasionally', 's2.q5.a3': 'No — first time considering it',
     's2.q6.section': 'About You',
@@ -1229,8 +1176,13 @@ const T = {
 
     'result.recommended': 'Mycogen Recommends For You', 'result.why': 'Why this one?',
     'result.match_prefix': 'Based on your answers, your best match is',
+    'result.match_label': 'match',
     'result.when': '🕐 Best time to take', 'result.weeks': 'For best results, use consistently for 2–4 weeks.',
     'result.forwhom': 'Who it\'s for', 'result.retake': 'Retake Survey',
+    'result.also_good': '✨ Also great for you',
+    'result.bundle.title': 'Triple Mushroom Bundle',
+    'result.bundle.desc': 'Based on your answers, all three medicinal mushrooms can benefit you! Try our Triple Bundle for complete energy, focus, and sleep support.',
+    'result.bundle.cta': '🛒 See Triple Mushroom Bundle',
 
     'thanks.title': 'Thank You for Your Feedback!',
     'thanks.desc': 'Your insights help us grow and improve.\nEvery drop of Mycodrops is crafted with care for nature and your wellbeing.',
@@ -1242,6 +1194,7 @@ const T = {
     'cta.buy.cord':   '🛒 Buy Cordyceps Drops',
     'cta.buy.lion':   "🛒 Buy Lion's Mane Drops",
     'cta.buy.reishi': '🛒 Buy Reishi Drops',
+    'cta.buy.short': 'Buy →',
 
     'badge.sugar': 'Zero Sugar', 'badge.caffeine': 'Caffeine-Free', 'badge.vegan': 'Vegan', 'badge.tw': '100% Made in Taiwan',
     'star.tap': 'Tap a star to rate',
@@ -1252,6 +1205,7 @@ const T = {
     'form.age': 'Age range', 'form.gender': 'Biological sex',
     'form.occupation': 'Occupation', 'form.source': 'How did you find us?',
     'form.extra': 'Anything else to share? (optional)', 'form.extra_ph': 'Suggestions, thoughts, or kind words — all welcome!',
+    'form.newsletter': 'I\'d like to receive mushroom wellness newsletters 🍄',
 
     'form.age_opts': ['Select','Under 18','18–24','25–34','35–44','45–54','55+'],
     'form.gender_opts': ['Select','Female','Male','Non-binary / Other','Prefer not to say'],
@@ -1352,11 +1306,12 @@ let s1data = {}, s2data = {}, s1Multi = {}, s2Multi = {};
 
 function startSurvey(n) {
   if (n === 1) {
-    s1data = { survey: lang === 'zh' ? '購後回饋' : 'Post-Purchase Feedback', lang, timestamp: new Date().toISOString() };
+    // 永遠使用中文名稱作為後台 survey key（英文模式也一樣，確保寫入 Sheets）
+    s1data = { survey: '購後回饋', lang, timestamp: new Date().toISOString() };
     s1Multi = {};
     showS1Step(1); showPage('page-s1');
   } else {
-    s2data = { survey: lang === 'zh' ? '新訪客探索' : 'New Visitor Discovery', lang, timestamp: new Date().toISOString() };
+    s2data = { survey: '新訪客探索', lang, timestamp: new Date().toISOString() };
     s2Multi = {};
     showS2Step(1); showPage('page-s2');
   }
@@ -1369,8 +1324,65 @@ function showS1Step(n) {
   if (el) el.style.display = 'block';
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
-function s1Next(c) { showS1Step(c + 1); }
-function s1Prev(c) { c > 1 ? showS1Step(c - 1) : showPage('page-landing'); }
+
+function s1Next(c) {
+  if (c === 1) {
+    // 若選了多個產品 → 顯示「最喜歡哪一款」追問
+    const products = s1Multi.s1_product || [];
+    if (products.length >= 2) {
+      populateQ1bOptions();
+      showS1Step('1b');
+    } else {
+      showS1Step(2);
+    }
+  } else if (c === '1b') {
+    showS1Step(2);
+  } else {
+    showS1Step(c + 1);
+  }
+}
+
+function s1Prev(c) {
+  if (c === 2) {
+    const products = s1Multi.s1_product || [];
+    if (products.length >= 2) {
+      showS1Step('1b');
+    } else {
+      showS1Step(1);
+    }
+  } else if (c > 1) {
+    showS1Step(c - 1);
+  } else {
+    showPage('page-landing');
+  }
+}
+
+// 動態產生 Q1b 選項（根據 Q1 選擇的產品）
+function populateQ1bOptions() {
+  const opts = document.getElementById('s1-q1b-opts');
+  if (!opts) return;
+  opts.innerHTML = '';
+  const products = s1Multi.s1_product || [];
+  const shroomMap = {
+    'Cordyceps 蟲草':      { icon: '🟠', shroom: 'cordyceps', labelKey: 'shroom.cord.name' },
+    "Lion's Mane 猴頭菇": { icon: '🔵', shroom: 'lionsmane', labelKey: 'shroom.lion.name' },
+    'Reishi 靈芝':         { icon: '🔴', shroom: 'reishi',    labelKey: 'shroom.reishi.name' }
+  };
+  products.forEach(p => {
+    const info = shroomMap[p];
+    if (!info) return;
+    const div = document.createElement('div');
+    div.className = 'opt';
+    div.setAttribute('data-shroom', info.shroom);
+    div.innerHTML = `<div class="opt-icon">${info.icon}</div><div><div class="opt-text">${t(info.labelKey)}</div></div>`;
+    div.onclick = function() {
+      opts.querySelectorAll('.opt').forEach(o => o.classList.remove('selected'));
+      div.classList.add('selected');
+      s1data.s1_favorite = p;
+    };
+    opts.appendChild(div);
+  });
+}
 
 // ── Survey 2 ──────────────────────────────────────────────────
 function showS2Step(n) {
@@ -1438,51 +1450,169 @@ function submitS2() {
   const d = s2data, m = s2Multi;
   let cord = 0, lion = 0, reishi = 0;
 
+  // Q1 困擾（複選）
   const concerns = m['s2_concern'] || [];
   if (concerns.includes('Fatigue'))          cord   += 3;
   if (concerns.includes('Brain fog'))        lion   += 3;
   if (concerns.includes('Poor sleep'))       reishi += 3;
   if (concerns.includes('Stress & anxiety')) { reishi += 2; lion += 1; }
 
+  // Q2 生活型態（單選）
   if (d.s2_lifestyle === 'Student')                 lion   += 2;
   if (d.s2_lifestyle === 'Office worker')           { lion += 1; reishi += 1; }
   if (d.s2_lifestyle === 'Athlete/Fitness')          cord   += 3;
   if (d.s2_lifestyle === 'Freelancer/Entrepreneur') { lion += 1; reishi += 1; cord += 1; }
 
-  if (d.s2_sleep === 'Chronic insomnia')       reishi += 3;
-  if (d.s2_sleep === 'Poor, light sleep')      reishi += 2;
+  // Q3 睡眠品質（單選）
+  if (d.s2_sleep === 'Chronic insomnia')         reishi += 3;
+  if (d.s2_sleep === 'Poor, light sleep')        reishi += 2;
   if (d.s2_sleep === 'Okay, occasional trouble') reishi += 1;
 
-  if (d.s2_goal === 'More energy')       cord   += 3;
-  if (d.s2_goal === 'Sharper focus')     lion   += 3;
-  if (d.s2_goal === 'Better sleep')      reishi += 3;
-  if (d.s2_goal === 'Less stress')       { reishi += 2; lion += 1; }
+  // Q4 期待改變（現改為複選）
+  const goals = m['s2_goal'] || [];
+  if (goals.includes('More energy'))   cord   += 3;
+  if (goals.includes('Sharper focus')) lion   += 3;
+  if (goals.includes('Better sleep'))  reishi += 3;
+  if (goals.includes('Less stress'))   { reishi += 2; lion += 1; }
 
   const total = (cord + lion + reishi) || 1;
   const pC = Math.round(cord / total * 100);
   const pL = Math.round(lion / total * 100);
   const pR = Math.round(reishi / total * 100);
 
-  let winner = 'lionsmane', topScore = lion;
-  if (cord   > topScore) { winner = 'cordyceps'; topScore = cord; }
-  if (reishi > topScore) { winner = 'reishi'; }
+  // 排序，取得推薦順序
+  const ranked = [
+    { id: 'cordyceps', score: cord, pct: pC },
+    { id: 'lionsmane', score: lion, pct: pL },
+    { id: 'reishi',    score: reishi, pct: pR }
+  ].sort((a, b) => b.score - a.score);
 
-  d.s2_recommended = winner;
+  // 記錄推薦結果
+  d.s2_recommended = ranked.filter(r => r.score > 0).map(r => r.id).join(' + ');
   d.s2_scores = `Cordyceps:${pC}% / Lion's Mane:${pL}% / Reishi:${pR}%`;
   sendToSheets({ ...d, ...m });
 
-  const nameMap = {
-    cordyceps: t('shroom.cord.name'),
-    lionsmane: t('shroom.lion.name'),
-    reishi:    t('shroom.reishi.name')
-  };
-  const pctMap = { cordyceps: pC, lionsmane: pL, reishi: pR };
-  const elMap  = { cordyceps: 'r-cord-pct', lionsmane: 'r-lion-pct', reishi: 'r-reishi-pct' };
+  // 顯示動態結果頁
+  buildResultPage(cord, lion, reishi);
+}
 
-  const el = document.getElementById(elMap[winner]);
-  if (el) el.textContent = nameMap[winner] + ' (' + pctMap[winner] + '%)';
+// ── 建立動態複選推薦結果頁 ───────────────────────────────────
+const SHROOM_META = {
+  cordyceps: {
+    img: 'images/cordyceps.png', nameEn: 'Cordyceps militaris',
+    nameKey: 'shroom.cord.name', tagKey: 'shroom.cord.tag',
+    benefits: ['🔋','shroom.cord.b1','💪','shroom.cord.b2','🛡️','shroom.cord.b3','⚡','shroom.cord.b4'],
+    usageKey: 'shroom.cord.usage', audienceKey: 'shroom.cord.audience',
+    btnClass: 'btn-cordyceps', linkKey: 'buy_cord', ctaKey: 'cta.buy.cord', icon: '🟠',
+    colorVar: 'var(--cordyceps)'
+  },
+  lionsmane: {
+    img: 'images/lionsmane.png', nameEn: "Lion's Mane · Hericium erinaceus",
+    nameKey: 'shroom.lion.name', tagKey: 'shroom.lion.tag',
+    benefits: ['🧠','shroom.lion.b1','📚','shroom.lion.b2','🌈','shroom.lion.b3','💼','shroom.lion.b4'],
+    usageKey: 'shroom.lion.usage', audienceKey: 'shroom.lion.audience',
+    btnClass: 'btn-lionsmane', linkKey: 'buy_lion', ctaKey: 'cta.buy.lion', icon: '🔵',
+    colorVar: 'var(--lionsmane)'
+  },
+  reishi: {
+    img: 'images/reishi.png', nameEn: 'Reishi · Ganoderma lucidum',
+    nameKey: 'shroom.reishi.name', tagKey: 'shroom.reishi.tag',
+    benefits: ['🌙','shroom.reishi.b1','🌿','shroom.reishi.b2','😊','shroom.reishi.b3','🛡️','shroom.reishi.b4'],
+    usageKey: 'shroom.reishi.usage', audienceKey: 'shroom.reishi.audience',
+    btnClass: 'btn-reishi', linkKey: 'buy_reishi', ctaKey: 'cta.buy.reishi', icon: '🔴',
+    colorVar: 'var(--reishi)'
+  }
+};
 
-  showPage('page-result-' + winner);
+function buildResultPage(cord, lion, reishi) {
+  const total = (cord + lion + reishi) || 1;
+  const ranked = [
+    { id: 'cordyceps', score: cord,   pct: Math.round(cord/total*100) },
+    { id: 'lionsmane', score: lion,   pct: Math.round(lion/total*100) },
+    { id: 'reishi',    score: reishi, pct: Math.round(reishi/total*100) }
+  ].sort((a, b) => b.score - a.score);
+
+  const primary = ranked[0];
+  const m = SHROOM_META[primary.id];
+
+  // ── 主推薦卡 ──
+  const primaryWrap = document.getElementById('result-primary-wrap');
+  const benefitPairs = [];
+  for (let i = 0; i < m.benefits.length; i += 2) {
+    benefitPairs.push(`<li>${m.benefits[i]} <span>${t(m.benefits[i+1])}</span></li>`);
+  }
+  primaryWrap.innerHTML = `
+    <div class="result-photo-wrap" style="background:${m.colorVar}">
+      <img src="${m.img}" alt="${t(m.nameKey)}" class="result-photo" onerror="this.style.display='none'">
+      <div class="result-photo-overlay">
+        <div class="result-photo-name">${t(m.nameKey)}</div>
+        <div class="result-photo-name-en">${m.nameEn}</div>
+        <div class="result-photo-tag">${t(m.tagKey)}</div>
+      </div>
+    </div>
+    <p class="result-match">${t('result.match_prefix')}<strong>${t(m.nameKey)} (${primary.pct}%)</strong></p>
+    <div class="card">
+      <div class="section-title">${t('result.why')}</div>
+      <ul class="benefit-list">${benefitPairs.join('')}</ul>
+      <div class="usage-card"><h4>${t('result.when')}</h4><p>${t(m.usageKey)}</p></div>
+      <div class="product-badges">
+        <span class="badge">${t('badge.sugar')}</span>
+        <span class="badge">${t('badge.caffeine')}</span>
+        <span class="badge">${t('badge.vegan')}</span>
+        <span class="badge">${t('badge.tw')}</span>
+      </div>
+    </div>
+    <div class="card">
+      <div class="section-title">${t('result.forwhom')}</div>
+      <p style="font-size:13px;color:var(--text);line-height:1.7">${t(m.audienceKey)}</p>
+    </div>
+    <a href="${LINKS[m.linkKey] || '#'}" target="_blank" class="btn ${m.btnClass}" style="margin-bottom:10px">${t(m.ctaKey)}</a>
+  `;
+
+  // ── 次要推薦卡 ──
+  const secondary = ranked.slice(1).filter(r => r.score > 0);
+  const secWrap = document.getElementById('result-secondary-wrap');
+  if (secondary.length > 0) {
+    const items = secondary.map(r => {
+      const sm = SHROOM_META[r.id];
+      return `<div class="result-sec-item">
+        <div style="display:flex;align-items:center;gap:12px">
+          <div style="font-size:26px">${sm.icon}</div>
+          <div style="flex:1">
+            <div style="font-weight:700;font-size:15px">${t(sm.nameKey)}</div>
+            <div style="font-size:12px;color:var(--muted)">${t(sm.tagKey)}<br><span style="color:var(--primary);font-weight:600">${r.pct}% ${t('result.match_label')}</span></div>
+          </div>
+          <a href="${LINKS[sm.linkKey] || '#'}" target="_blank" class="btn ${sm.btnClass} result-buy-mini">${t('cta.buy.short')}</a>
+        </div>
+      </div>`;
+    }).join('');
+    secWrap.innerHTML = `<div class="card"><div class="section-title">${t('result.also_good')}</div>${items}</div>`;
+  } else {
+    secWrap.innerHTML = '';
+  }
+
+  // ── 套組推薦（三種菇都有分時顯示）──
+  const bundleWrap = document.getElementById('result-bundle-wrap');
+  if (ranked[2].score > 0) {
+    bundleWrap.innerHTML = `
+      <div class="result-bundle-card">
+        <div style="font-size:32px;margin-bottom:10px">🍄🍄🍄</div>
+        <div style="font-size:18px;font-weight:800;color:var(--primary-d);margin-bottom:8px">${t('result.bundle.title')}</div>
+        <p style="font-size:13px;color:var(--muted);line-height:1.6;margin-bottom:16px">${t('result.bundle.desc')}</p>
+        <a href="${LINKS.shop || '#'}" target="_blank" class="btn btn-primary">${t('result.bundle.cta')}</a>
+      </div>`;
+  } else {
+    bundleWrap.innerHTML = '';
+  }
+
+  // ── 行動按鈕 ──
+  const actionBtns = document.getElementById('result-action-btns');
+  actionBtns.innerHTML = `
+    <a href="${LINKS.line}" target="_blank" class="btn btn-line">${t('cta.line')}</a>
+    <a href="${LINKS.workshop}" target="_blank" class="btn btn-workshop">${t('cta.workshop')}</a>
+  `;
+
+  showPage('page-result');
 }
 
 // ── 送出 Google Sheets ────────────────────────────────────────
