@@ -48,7 +48,7 @@ const S1_HEADERS = [
 
 // ── 問卷二欄位順序 ───────────────────────────────────────────────
 const S2_HEADERS = [
-  'timestamp', 'nickname', 'email', 'age', 'gender', 'source',
+  'timestamp', 'nickname', 'email', 'age', 'gender', 'occupation', 'source',
   's2_concern', 's2_lifestyle', 's2_lifestyle_other',
   's2_sleep', 's2_daytime_energy',
   's2_habits', 's2_latenight',

@@ -497,7 +497,7 @@
     <div class="card" style="margin-top:0">
       <div class="q-label" data-i18n="s1.q1c.dosage_label"></div>
       <div class="q-hint" style="font-size:11px;color:var(--muted);margin-top:4px">1 滴管 = 1ml</div>
-      <div class="options" id="s1-q1c-dosage-opts"></div>
+      <div class="opts-grid" id="s1-q1c-dosage-opts"></div>
       <textarea style="margin-top:12px" id="s1-q1c-dosage-other" data-i18n-placeholder="s1.q1c.dosage_other_ph"></textarea>
     </div>
     <div class="card" style="margin-top:0">
@@ -863,24 +863,25 @@
     <div class="card">
       <div class="q-label">Question 2</div>
       <div class="q-title" data-i18n="s2.q2.title"></div>
+      <div class="q-hint" data-i18n="s2.q2.hint"></div>
       <div class="options">
-        <div class="opt" onclick="selectSingle(this,'s2_lifestyle','Student')">
+        <div class="opt" onclick="toggleChip(this,'s2_lifestyle','Student')">
           <div class="opt-icon">📚</div>
           <div><div class="opt-text" data-i18n="s2.q2.a1"></div><div class="opt-desc" data-i18n="s2.q2.a1d"></div></div>
         </div>
-        <div class="opt" onclick="selectSingle(this,'s2_lifestyle','Office worker')">
+        <div class="opt" onclick="toggleChip(this,'s2_lifestyle','Office worker')">
           <div class="opt-icon">💼</div>
           <div><div class="opt-text" data-i18n="s2.q2.a2"></div><div class="opt-desc" data-i18n="s2.q2.a2d"></div></div>
         </div>
-        <div class="opt" onclick="selectSingle(this,'s2_lifestyle','Athlete/Fitness')">
+        <div class="opt" onclick="toggleChip(this,'s2_lifestyle','Athlete/Fitness')">
           <div class="opt-icon">🏋️</div>
           <div><div class="opt-text" data-i18n="s2.q2.a3"></div><div class="opt-desc" data-i18n="s2.q2.a3d"></div></div>
         </div>
-        <div class="opt" onclick="selectSingle(this,'s2_lifestyle','Freelancer/Entrepreneur')">
+        <div class="opt" onclick="toggleChip(this,'s2_lifestyle','Freelancer/Entrepreneur')">
           <div class="opt-icon">🚀</div>
           <div><div class="opt-text" data-i18n="s2.q2.a4"></div><div class="opt-desc" data-i18n="s2.q2.a4d"></div></div>
         </div>
-        <div class="opt" onclick="selectSingle(this,'s2_lifestyle','Other')">
+        <div class="opt" onclick="toggleChip(this,'s2_lifestyle','Other')">
           <div class="opt-icon">✏️</div>
           <div><div class="opt-text" data-i18n="s2.q2.a5"></div></div>
         </div>
@@ -1010,11 +1011,12 @@
     <div class="card">
       <div class="q-label">Question 7</div>
       <div class="q-title" data-i18n="s2.q3f.title"></div>
+      <div class="q-hint" data-i18n="s2.q3f.hint"></div>
       <div class="options">
-        <div class="opt" onclick="selectSingle(this,'s2_psych_med','No')"><div class="opt-icon">✅</div><div class="opt-text" data-i18n="s2.q3f.a1"></div></div>
-        <div class="opt" onclick="selectSingle(this,'s2_psych_med','Sleeping pills')"><div class="opt-icon">💊</div><div class="opt-text" data-i18n="s2.q3f.a2"></div></div>
-        <div class="opt" onclick="selectSingle(this,'s2_psych_med','Antidepressants')"><div class="opt-icon">🌿</div><div class="opt-text" data-i18n="s2.q3f.a3"></div></div>
-        <div class="opt" onclick="selectSingle(this,'s2_psych_med','Other psych meds')"><div class="opt-icon">🏥</div><div class="opt-text" data-i18n="s2.q3f.a4"></div></div>
+        <div class="opt" onclick="toggleChip(this,'s2_psych_med','No')"><div class="opt-icon">✅</div><div class="opt-text" data-i18n="s2.q3f.a1"></div></div>
+        <div class="opt" onclick="toggleChip(this,'s2_psych_med','Sleeping pills')"><div class="opt-icon">💊</div><div class="opt-text" data-i18n="s2.q3f.a2"></div></div>
+        <div class="opt" onclick="toggleChip(this,'s2_psych_med','Antidepressants')"><div class="opt-icon">🌿</div><div class="opt-text" data-i18n="s2.q3f.a3"></div></div>
+        <div class="opt" onclick="toggleChip(this,'s2_psych_med','Other psych meds')"><div class="opt-icon">🏥</div><div class="opt-text" data-i18n="s2.q3f.a4"></div></div>
       </div>
     </div>
     <button class="btn btn-primary" onclick="s2Next('3f')" data-i18n="nav.next"></button>
@@ -1100,6 +1102,10 @@
             <label data-i18n="form.gender"></label>
             <select onchange="s2data.gender=this.value" id="s2-gender-sel"></select>
           </div>
+        </div>
+        <div class="form-group">
+          <label data-i18n="form.occupation"></label>
+          <select onchange="s2data.occupation=this.value" id="s2-occ-sel"></select>
         </div>
         <div class="form-group">
           <label data-i18n="form.source"></label>
@@ -1222,7 +1228,8 @@ const T = {
     's1.q1c.imp1': '⚡ 精力提升', 's1.q1c.imp2': '😴 睡眠改善', 's1.q1c.imp3': '🧠 專注力提升',
     's1.q1c.imp4': '🌿 壓力減輕', 's1.q1c.imp5': '😊 情緒穩定', 's1.q1c.imp6': '🏋️ 運動表現',
     's1.q1c.imp7': '🛡️ 免疫感受', 's1.q1c.imp8': '🤔 尚未明顯感受',
-    's1.q1c.t1': '白天', 's1.q1c.t2': '晚上', 's1.q1c.t3': '工作前', 's1.q1c.t4': '運動前後',
+    's1.q1c.t1': '☀️ 白天', 's1.q1c.t2': '🌙 晚上', 's1.q1c.t3': '💤 睡前',
+    's1.q1c.t4': '🌅 起床後', 's1.q1c.t5': '😴 疲勞時', 's1.q1c.t6': '💼 工作前', 's1.q1c.t7': '🏋️ 運動前後',
     's1.q1c.timing_other_ph': '其他時機（選填）',
     's1.q1c.d1': '1 滴管 (1ml)', 's1.q1c.d2': '2 滴管 (2ml)', 's1.q1c.d3': '3 滴管以上 (3ml+)', 's1.q1c.d4': '按建議量',
     's1.q1c.dosage_other_ph': '其他用量（選填）',
@@ -1237,7 +1244,7 @@ const T = {
     's2.q1.a2': '難以專注，腦子常打結', 's2.q1.a2d': '讀書、工作效率低落',
     's2.q1.a3': '睡眠不好，難以入睡或淺眠', 's2.q1.a3d': '睡了卻沒有休息感',
     's2.q1.a4': '壓力大，容易焦慮緊張', 's2.q1.a4d': '情緒波動，心情不穩定',
-    's2.q2.section': '生活型態', 's2.q2.title': '你的日常生活最接近哪一種？',
+    's2.q2.section': '生活型態', 's2.q2.title': '你的日常生活最接近哪一種？', 's2.q2.hint': '可複選',
     's2.q2.a1': '學生 / 讀書為主', 's2.q2.a1d': '需要高效記憶與長時間專注',
     's2.q2.a2': '上班族 / 辦公室工作', 's2.q2.a2d': '久坐、螢幕前工作、腦霧困擾',
     's2.q2.a3': '健身 / 運動愛好者', 's2.q2.a3d': '需要體能支撐與運動後恢復',
@@ -1264,7 +1271,7 @@ const T = {
     's2.q3e.section': '過敏資訊', 's2.q3e.title': '您有以下過敏狀況嗎？', 's2.q3e.hint': '可複選',
     's2.q3e.a1': '酒精過敏', 's2.q3e.a2': '菇類過敏', 's2.q3e.a3': '花粉過敏', 's2.q3e.a4': '無已知過敏',
     's2.q3e.other_ph': '其他過敏（請填寫）',
-    's2.q3f.section': '用藥資訊', 's2.q3f.title': '您目前是否有服用身心科相關藥物？',
+    's2.q3f.section': '用藥資訊', 's2.q3f.title': '您目前是否有服用身心科相關藥物？', 's2.q3f.hint': '可複選',
     's2.q3f.a1': '沒有', 's2.q3f.a2': '安眠藥', 's2.q3f.a3': '抗憂鬱藥', 's2.q3f.a4': '其他身心科藥物',
     's2.q6.section': '基本資料',
     's2.submit': '看看我適合哪種菇 🍄',
@@ -1394,7 +1401,8 @@ const T = {
     's1.q1c.imp1': '⚡ More energy', 's1.q1c.imp2': '😴 Better sleep', 's1.q1c.imp3': '🧠 Better focus',
     's1.q1c.imp4': '🌿 Less stress', 's1.q1c.imp5': '😊 Mood stability', 's1.q1c.imp6': '🏋️ Athletic performance',
     's1.q1c.imp7': '🛡️ Immunity', 's1.q1c.imp8': '🤔 Nothing noticeable yet',
-    's1.q1c.t1': 'Daytime', 's1.q1c.t2': 'Evening', 's1.q1c.t3': 'Before work', 's1.q1c.t4': 'Before/after exercise',
+    's1.q1c.t1': '☀️ Daytime', 's1.q1c.t2': '🌙 Evening', 's1.q1c.t3': '💤 Before sleep',
+    's1.q1c.t4': '🌅 After waking', 's1.q1c.t5': '😴 When tired', 's1.q1c.t6': '💼 Before work', 's1.q1c.t7': '🏋️ Before/after exercise',
     's1.q1c.timing_other_ph': 'Other timing (optional)',
     's1.q1c.d1': '1 dropper (1ml)', 's1.q1c.d2': '2 droppers (2ml)', 's1.q1c.d3': '3+ droppers (3ml+)', 's1.q1c.d4': 'As recommended',
     's1.q1c.dosage_other_ph': 'Other dosage (optional)',
@@ -1409,7 +1417,7 @@ const T = {
     's2.q1.a2': 'Brain fog & poor focus', 's2.q1.a2d': 'Struggling to study or work efficiently',
     's2.q1.a3': 'Poor sleep quality', 's2.q1.a3d': 'Waking up still feeling tired',
     's2.q1.a4': 'Stress & anxiety', 's2.q1.a4d': 'Mood swings and feeling overwhelmed',
-    's2.q2.section': 'Lifestyle', 's2.q2.title': 'Which best describes your daily life?',
+    's2.q2.section': 'Lifestyle', 's2.q2.title': 'Which best describes your daily life?', 's2.q2.hint': 'Select all that apply',
     's2.q2.a1': 'Student', 's2.q2.a1d': 'Need sharp memory and sustained focus',
     's2.q2.a2': 'Office worker', 's2.q2.a2d': 'Desk-based, screen time, brain fog',
     's2.q2.a3': 'Athlete / Fitness enthusiast', 's2.q2.a3d': 'Need physical stamina and recovery',
@@ -1436,7 +1444,7 @@ const T = {
     's2.q3e.section': 'Allergies', 's2.q3e.title': 'Do you have any known allergies?', 's2.q3e.hint': 'Select all that apply',
     's2.q3e.a1': 'Alcohol allergy', 's2.q3e.a2': 'Mushroom allergy', 's2.q3e.a3': 'Pollen allergy', 's2.q3e.a4': 'No known allergies',
     's2.q3e.other_ph': 'Other allergies (please specify)',
-    's2.q3f.section': 'Medications', 's2.q3f.title': 'Are you currently taking any psychiatric or sleep medications?',
+    's2.q3f.section': 'Medications', 's2.q3f.title': 'Are you currently taking any psychiatric or sleep medications?', 's2.q3f.hint': 'Select all that apply',
     's2.q3f.a1': 'No', 's2.q3f.a2': 'Sleeping pills', 's2.q3f.a3': 'Antidepressants', 's2.q3f.a4': 'Other psychiatric medication',
     's2.q6.section': 'About You',
     's2.submit': 'See My Mushroom Match 🍄',
@@ -1538,6 +1546,7 @@ function applyTranslations() {
   fillSelect('s1-gender-sel', 'form.gender_opts');
   fillSelect('s2-gender-sel', 'form.gender_opts');
   fillSelect('s1-occ-sel',    'form.occ_opts');
+  fillSelect('s2-occ-sel',    'form.occ_opts');
   fillSelect('s1-src-sel',    'form.src_opts');
   fillSelect('s2-src-sel',    'form.src_opts');
   // 套用連結
@@ -1748,11 +1757,11 @@ function populateProductDetail(productName) {
     impOpts.appendChild(chip);
   });
 
-  // Timing options (multi-select chips)
+  // Timing options (multi-select chips) — 7 options
   const timingOpts = document.getElementById('s1-q1c-timing-opts');
   timingOpts.innerHTML = '';
-  const timingValues = ['Daytime','Evening','Before work','Before/after exercise'];
-  const timingKeys   = ['s1.q1c.t1','s1.q1c.t2','s1.q1c.t3','s1.q1c.t4'];
+  const timingValues = ['Daytime','Evening','Before sleep','After waking','When tired','Before work','Before/after exercise'];
+  const timingKeys   = ['s1.q1c.t1','s1.q1c.t2','s1.q1c.t3','s1.q1c.t4','s1.q1c.t5','s1.q1c.t6','s1.q1c.t7'];
   const savedTiming  = s1Multi[k + '_timing'] || [];
   timingValues.forEach((v, i) => {
     const chip = document.createElement('div');
@@ -1767,18 +1776,18 @@ function populateProductDetail(productName) {
   timingOtherTA.value = s1data[k + '_timing_other'] || '';
   timingOtherTA.oninput = () => { s1data[k + '_timing_other'] = timingOtherTA.value; };
 
-  // Dosage options (single select)
+  // Dosage options (multi-select chips)
   const dosageOpts = document.getElementById('s1-q1c-dosage-opts');
   dosageOpts.innerHTML = '';
   const dosageValues = ['1 dropper (1ml)','2 droppers (2ml)','3+ droppers (3ml+)','As recommended'];
   const dosageKeys   = ['s1.q1c.d1','s1.q1c.d2','s1.q1c.d3','s1.q1c.d4'];
-  const savedDosage  = s1data[k + '_dosage'] || '';
+  const savedDosage  = s1Multi[k + '_dosage'] || [];
   dosageValues.forEach((v, i) => {
-    const opt = document.createElement('div');
-    opt.className = 'opt' + (savedDosage === v ? ' selected' : '');
-    opt.innerHTML = '<div class="opt-text">' + t(dosageKeys[i]) + '</div>';
-    opt.onclick = () => { dosageOpts.querySelectorAll('.opt').forEach(o => o.classList.remove('selected')); opt.classList.add('selected'); s1data[k + '_dosage'] = v; };
-    dosageOpts.appendChild(opt);
+    const chip = document.createElement('div');
+    chip.className = 'opt-chip' + (savedDosage.includes(v) ? ' selected' : '');
+    chip.innerHTML = '<span>' + t(dosageKeys[i]) + '</span>';
+    chip.onclick = () => toggleChip(chip, k + '_dosage', v);
+    dosageOpts.appendChild(chip);
   });
 
   // Dosage other textarea
@@ -1820,7 +1829,7 @@ function s1NextProductDetail() {
   // Validate all 4 sections
   const impSel = document.getElementById('s1-q1c-improvement-opts') && document.getElementById('s1-q1c-improvement-opts').querySelector('.opt-chip.selected');
   const timSel = document.getElementById('s1-q1c-timing-opts') && document.getElementById('s1-q1c-timing-opts').querySelector('.opt-chip.selected');
-  const dosSel = document.getElementById('s1-q1c-dosage-opts') && document.getElementById('s1-q1c-dosage-opts').querySelector('.opt.selected');
+  const dosSel = document.getElementById('s1-q1c-dosage-opts') && document.getElementById('s1-q1c-dosage-opts').querySelector('.opt-chip.selected');
   const metSel = document.getElementById('s1-q1c-method-opts') && document.getElementById('s1-q1c-method-opts').querySelector('.opt-chip.selected');
   if (!impSel || !timSel || !dosSel || !metSel) { alert(vMsg); return; }
   if (productDetailIndex < productDetailList.length - 1) {
@@ -1935,11 +1944,12 @@ function submitS2() {
   if (concerns.includes('Poor sleep'))       reishi += 3;
   if (concerns.includes('Stress & anxiety')) { reishi += 2; lion += 1; }
 
-  // Q2 生活型態（單選）
-  if (d.s2_lifestyle === 'Student')                 lion   += 2;
-  if (d.s2_lifestyle === 'Office worker')           { lion += 1; reishi += 1; }
-  if (d.s2_lifestyle === 'Athlete/Fitness')          cord   += 3;
-  if (d.s2_lifestyle === 'Freelancer/Entrepreneur') { lion += 1; reishi += 1; cord += 1; }
+  // Q2 生活型態（複選）
+  const lifestyle = m['s2_lifestyle'] || [];
+  if (lifestyle.includes('Student'))                 lion   += 2;
+  if (lifestyle.includes('Office worker'))           { lion += 1; reishi += 1; }
+  if (lifestyle.includes('Athlete/Fitness'))          cord   += 3;
+  if (lifestyle.includes('Freelancer/Entrepreneur')) { lion += 1; reishi += 1; cord += 1; }
 
   // Q3 睡眠品質（單選）
   if (d.s2_sleep === 'Chronic insomnia')         reishi += 3;
@@ -2057,7 +2067,7 @@ function buildResultPage(cord, lion, reishi) {
       <div class="section-title">${t('result.forwhom')}</div>
       <p style="font-size:13px;color:var(--text);line-height:1.7">${t(m.audienceKey)}</p>
     </div>
-    <a href="${LINKS[m.linkKey] || '#'}" target="_blank" class="btn ${m.btnClass}" style="margin-bottom:10px">${t(m.ctaKey)}</a>
+    <a href="${LINKS.line}" target="_blank" class="btn ${m.btnClass}" style="margin-bottom:10px">${t(m.ctaKey)}</a>
   `;
 
   // ── 次要推薦卡 ──
@@ -2073,7 +2083,7 @@ function buildResultPage(cord, lion, reishi) {
             <div style="font-weight:700;font-size:15px">${t(sm.nameKey)}</div>
             <div style="font-size:12px;color:var(--muted)">${t(sm.tagKey)}<br><span style="color:var(--primary);font-weight:600">${r.pct}% ${t('result.match_label')}</span></div>
           </div>
-          <a href="${LINKS[sm.linkKey] || '#'}" target="_blank" class="btn ${sm.btnClass} result-buy-mini">${t('cta.buy.short')}</a>
+          <a href="${LINKS.line}" target="_blank" class="btn ${sm.btnClass} result-buy-mini">${t('cta.buy.short')}</a>
         </div>
       </div>`;
     }).join('');
@@ -2082,19 +2092,8 @@ function buildResultPage(cord, lion, reishi) {
     secWrap.innerHTML = '';
   }
 
-  // ── 套組推薦（三種菇都有分時顯示）──
-  const bundleWrap = document.getElementById('result-bundle-wrap');
-  if (ranked[2].score > 0) {
-    bundleWrap.innerHTML = `
-      <div class="result-bundle-card">
-        <div style="font-size:32px;margin-bottom:10px">🍄🍄🍄</div>
-        <div style="font-size:18px;font-weight:800;color:var(--primary-d);margin-bottom:8px">${t('result.bundle.title')}</div>
-        <p style="font-size:13px;color:var(--muted);line-height:1.6;margin-bottom:16px">${t('result.bundle.desc')}</p>
-        <a href="${LINKS.shop || '#'}" target="_blank" class="btn btn-primary">${t('result.bundle.cta')}</a>
-      </div>`;
-  } else {
-    bundleWrap.innerHTML = '';
-  }
+  // ── 套組推薦（已移除）──
+  document.getElementById('result-bundle-wrap').innerHTML = '';
 
   // ── 行動按鈕 ──
   const actionBtns = document.getElementById('result-action-btns');
