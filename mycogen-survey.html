@@ -238,6 +238,11 @@
     .nav-back { display: inline-flex; align-items: center; gap: 5px; padding: 8px 0; font-size: 12px; color: var(--muted); cursor: pointer; margin-bottom: 2px; background: none; border: none; font-family: inherit; }
     .nav-back:hover { color: var(--primary); }
 
+    /* ─── Nav Home ─── */
+    .nav-home { position:absolute; top:12px; right:16px; font-size:12px; color:var(--primary); text-decoration:none; cursor:pointer; background:none; border:none; padding:4px 8px; border-radius:6px; font-family:inherit; }
+    .nav-home:hover { background:rgba(139,97,139,.1); }
+    .s1-step, .s2-step { position: relative; }
+
     /* ─── 響應式 ─── */
     @media (max-width: 400px) {
       .form-row { grid-template-columns: 1fr; }
@@ -424,6 +429,7 @@
 
   <!-- Q1 -->
   <div id="s1-q1" class="s1-step">
+    <button class="nav-home" onclick="showPage('page-lang')" data-i18n="nav.home"></button>
     <button class="nav-back" onclick="showPage('page-landing')">← <span data-i18n="nav.back"></span></button>
     <div class="progress-wrap">
       <div class="progress-label"><span data-i18n="s1.q1.section"></span><span>1 / 9</span></div>
@@ -453,6 +459,7 @@
 
   <!-- Q1b: 多選產品後追問最愛款 -->
   <div id="s1-q1b" class="s1-step" style="display:none">
+    <button class="nav-home" onclick="showPage('page-lang')" data-i18n="nav.home"></button>
     <div class="progress-wrap">
       <div class="progress-label"><span data-i18n="s1.q1.section"></span><span>1 / 9</span></div>
       <div class="progress-bar"><div class="progress-fill" style="width:11%"></div></div>
@@ -470,6 +477,7 @@
 
   <!-- Q1c: 各產品使用細節（動態，每個選到的產品顯示一次） -->
   <div id="s1-q1c" class="s1-step" style="display:none">
+    <button class="nav-home" onclick="showPage('page-lang')" data-i18n="nav.home"></button>
     <div class="progress-wrap">
       <div class="progress-label"><span data-i18n="s1.q1c.section"></span><span id="s1-q1c-counter"></span></div>
       <div class="progress-bar"><div class="progress-fill" style="width:11%"></div></div>
@@ -482,11 +490,15 @@
     </div>
     <div class="card" style="margin-top:0">
       <div class="q-label" data-i18n="s1.q1c.timing_label"></div>
-      <div class="options" id="s1-q1c-timing-opts"></div>
+      <div class="q-hint" data-i18n="s1.q1c.hint_multi"></div>
+      <div class="opts-grid" id="s1-q1c-timing-opts"></div>
+      <textarea style="margin-top:12px" id="s1-q1c-timing-other" data-i18n-placeholder="s1.q1c.timing_other_ph"></textarea>
     </div>
     <div class="card" style="margin-top:0">
       <div class="q-label" data-i18n="s1.q1c.dosage_label"></div>
+      <div class="q-hint" style="font-size:11px;color:var(--muted);margin-top:4px">1 滴管 = 1ml</div>
       <div class="options" id="s1-q1c-dosage-opts"></div>
+      <textarea style="margin-top:12px" id="s1-q1c-dosage-other" data-i18n-placeholder="s1.q1c.dosage_other_ph"></textarea>
     </div>
     <div class="card" style="margin-top:0">
       <div class="q-label" data-i18n="s1.q1c.method_label"></div>
@@ -500,6 +512,7 @@
 
   <!-- Q2 -->
   <div id="s1-q2" class="s1-step" style="display:none">
+    <button class="nav-home" onclick="showPage('page-lang')" data-i18n="nav.home"></button>
     <div class="progress-wrap">
       <div class="progress-label"><span data-i18n="s1.q2.section"></span><span>2 / 9</span></div>
       <div class="progress-bar"><div class="progress-fill" style="width:22%"></div></div>
@@ -520,6 +533,7 @@
 
   <!-- Q3 -->
   <div id="s1-q3" class="s1-step" style="display:none">
+    <button class="nav-home" onclick="showPage('page-lang')" data-i18n="nav.home"></button>
     <div class="progress-wrap">
       <div class="progress-label"><span data-i18n="s1.q3.section"></span><span>3 / 9</span></div>
       <div class="progress-bar"><div class="progress-fill" style="width:33%"></div></div>
@@ -540,6 +554,7 @@
 
   <!-- Q4 -->
   <div id="s1-q4" class="s1-step" style="display:none">
+    <button class="nav-home" onclick="showPage('page-lang')" data-i18n="nav.home"></button>
     <div class="progress-wrap">
       <div class="progress-label"><span data-i18n="s1.q4.section"></span><span>4 / 9</span></div>
       <div class="progress-bar"><div class="progress-fill" style="width:44%"></div></div>
@@ -565,6 +580,7 @@
 
   <!-- Q5 -->
   <div id="s1-q5" class="s1-step" style="display:none">
+    <button class="nav-home" onclick="showPage('page-lang')" data-i18n="nav.home"></button>
     <div class="progress-wrap">
       <div class="progress-label"><span data-i18n="s1.q5.section"></span><span>5 / 9</span></div>
       <div class="progress-bar"><div class="progress-fill" style="width:55%"></div></div>
@@ -599,6 +615,7 @@
 
   <!-- Q6 -->
   <div id="s1-q6" class="s1-step" style="display:none">
+    <button class="nav-home" onclick="showPage('page-lang')" data-i18n="nav.home"></button>
     <div class="progress-wrap">
       <div class="progress-label"><span data-i18n="s1.q6.section"></span><span>6 / 9</span></div>
       <div class="progress-bar"><div class="progress-fill" style="width:66%"></div></div>
@@ -625,6 +642,7 @@
 
   <!-- Q7 -->
   <div id="s1-q7" class="s1-step" style="display:none">
+    <button class="nav-home" onclick="showPage('page-lang')" data-i18n="nav.home"></button>
     <div class="progress-wrap">
       <div class="progress-label"><span data-i18n="s1.q7.section"></span><span>7 / 9</span></div>
       <div class="progress-bar"><div class="progress-fill" style="width:77%"></div></div>
@@ -639,12 +657,13 @@
         <div class="opt" onclick="selectSingle(this,'s1_repurchase','Not likely')"><div class="opt-icon">🚫</div><div class="opt-text" data-i18n="s1.q7.a4"></div></div>
       </div>
     </div>
-    <button class="btn btn-primary" onclick="showS1Step('7b')" data-i18n="nav.next"></button>
+    <button class="btn btn-primary" onclick="s1Next(7)" data-i18n="nav.next"></button>
     <button class="btn btn-secondary" style="margin-top:8px" onclick="s1Prev(7)" data-i18n="nav.prev"></button>
   </div>
 
   <!-- Q7b: 不考慮回購的原因 -->
   <div id="s1-q7b" class="s1-step" style="display:none">
+    <button class="nav-home" onclick="showPage('page-lang')" data-i18n="nav.home"></button>
     <div class="progress-wrap">
       <div class="progress-label"><span data-i18n="s1.q7b.section"></span><span>8 / 10</span></div>
       <div class="progress-bar"><div class="progress-fill" style="width:80%"></div></div>
@@ -659,7 +678,6 @@
         <div class="opt-chip" onclick="toggleChip(this,'s1_no_repurchase','Taste/smell')"><span data-i18n="s1.q7b.r3"></span></div>
         <div class="opt-chip" onclick="toggleChip(this,'s1_no_repurchase','Found alternative')"><span data-i18n="s1.q7b.r4"></span></div>
         <div class="opt-chip" onclick="toggleChip(this,'s1_no_repurchase','No longer needed')"><span data-i18n="s1.q7b.r5"></span></div>
-        <div class="opt-chip" onclick="toggleChip(this,'s1_no_repurchase','Budget constraint')"><span data-i18n="s1.q7b.r6"></span></div>
       </div>
       <textarea style="margin-top:12px" data-i18n-placeholder="s1.q7b.other_ph" oninput="s1data.s1_no_repurchase_other=this.value"></textarea>
     </div>
@@ -669,6 +687,7 @@
 
   <!-- Q8: 推薦哪一款 -->
   <div id="s1-q8" class="s1-step" style="display:none">
+    <button class="nav-home" onclick="showPage('page-lang')" data-i18n="nav.home"></button>
     <div class="progress-wrap">
       <div class="progress-label"><span data-i18n="s1.q8.section"></span><span>9 / 10</span></div>
       <div class="progress-bar"><div class="progress-fill" style="width:90%"></div></div>
@@ -677,19 +696,19 @@
       <div class="q-label">Question 8</div>
       <div class="q-title" data-i18n="s1.q8.title"></div>
       <div class="options">
-        <div class="opt" data-shroom="cordyceps" onclick="selectSingle(this,'s1_recommend_product','Cordyceps 蟲草')">
+        <div class="opt" onclick="toggleChip(this,'s1_recommend_product','Cordyceps 蟲草')">
           <div class="opt-icon">🟠</div>
           <div><div class="opt-text" data-i18n="shroom.cord.name"></div><div class="opt-desc" data-i18n="shroom.cord.tagwhen"></div></div>
         </div>
-        <div class="opt" data-shroom="lionsmane" onclick="selectSingle(this,'s1_recommend_product',&quot;Lion's Mane 猴頭菇&quot;)">
+        <div class="opt" onclick="toggleChip(this,'s1_recommend_product',&quot;Lion's Mane 猴頭菇&quot;)">
           <div class="opt-icon">🔵</div>
           <div><div class="opt-text" data-i18n="shroom.lion.name"></div><div class="opt-desc" data-i18n="shroom.lion.tagwhen"></div></div>
         </div>
-        <div class="opt" data-shroom="reishi" onclick="selectSingle(this,'s1_recommend_product','Reishi 靈芝')">
+        <div class="opt" onclick="toggleChip(this,'s1_recommend_product','Reishi 靈芝')">
           <div class="opt-icon">🔴</div>
           <div><div class="opt-text" data-i18n="shroom.reishi.name"></div><div class="opt-desc" data-i18n="shroom.reishi.tagwhen"></div></div>
         </div>
-        <div class="opt" onclick="selectSingle(this,'s1_recommend_product','Would not recommend')">
+        <div class="opt" onclick="toggleChip(this,'s1_recommend_product','Would not recommend')">
           <div class="opt-icon">🚫</div>
           <div><div class="opt-text" data-i18n="s1.q8.no_rec"></div></div>
         </div>
@@ -714,6 +733,7 @@
 
   <!-- Q9 基本資料 -->
   <div id="s1-q9" class="s1-step" style="display:none">
+    <button class="nav-home" onclick="showPage('page-lang')" data-i18n="nav.home"></button>
     <div class="progress-wrap">
       <div class="progress-label"><span data-i18n="s1.q9.section"></span><span>9 / 9</span></div>
       <div class="progress-bar"><div class="progress-fill" style="width:100%"></div></div>
@@ -781,6 +801,9 @@
       <a data-link="workshop" href="#" target="_blank" class="btn btn-workshop" data-i18n="cta.workshop"></a>
     </div>
   </div>
+  <a href="https://lin.ee/xcXnWlC" target="_blank" class="btn btn-coupon" style="margin-top:20px;display:block;text-align:center;font-size:16px;font-weight:800;padding:16px 20px;background:linear-gradient(135deg,#7C5C7C,#A67CA6);color:#fff;border-radius:12px;text-decoration:none">
+    🎁 立刻領取《舊客回饋感謝折價券 $100》
+  </a>
   <p style="text-align:center;font-size:12px;color:var(--muted);margin-top:14px">
     <a data-link="instagram" href="#" style="color:var(--primary)">@MYCOGEN.TW</a>
   </p>
@@ -798,10 +821,11 @@
 
   <!-- Q1 -->
   <div id="s2-q1" class="s2-step">
+    <button class="nav-home" onclick="showPage('page-lang')" data-i18n="nav.home"></button>
     <button class="nav-back" onclick="showPage('page-landing')">← <span data-i18n="nav.back"></span></button>
     <div class="progress-wrap">
-      <div class="progress-label"><span data-i18n="s2.q1.section"></span><span>1 / 6</span></div>
-      <div class="progress-bar"><div class="progress-fill" style="width:17%"></div></div>
+      <div class="progress-label"><span data-i18n="s2.q1.section"></span><span>1 / 11</span></div>
+      <div class="progress-bar"><div class="progress-fill" style="width:9%"></div></div>
     </div>
     <div class="card">
       <div class="q-label">Question 1</div>
@@ -831,9 +855,10 @@
 
   <!-- Q2 -->
   <div id="s2-q2" class="s2-step" style="display:none">
+    <button class="nav-home" onclick="showPage('page-lang')" data-i18n="nav.home"></button>
     <div class="progress-wrap">
-      <div class="progress-label"><span data-i18n="s2.q2.section"></span><span>2 / 6</span></div>
-      <div class="progress-bar"><div class="progress-fill" style="width:33%"></div></div>
+      <div class="progress-label"><span data-i18n="s2.q2.section"></span><span>2 / 11</span></div>
+      <div class="progress-bar"><div class="progress-fill" style="width:18%"></div></div>
     </div>
     <div class="card">
       <div class="q-label">Question 2</div>
@@ -855,7 +880,12 @@
           <div class="opt-icon">🚀</div>
           <div><div class="opt-text" data-i18n="s2.q2.a4"></div><div class="opt-desc" data-i18n="s2.q2.a4d"></div></div>
         </div>
+        <div class="opt" onclick="selectSingle(this,'s2_lifestyle','Other')">
+          <div class="opt-icon">✏️</div>
+          <div><div class="opt-text" data-i18n="s2.q2.a5"></div></div>
+        </div>
       </div>
+      <textarea style="margin-top:12px" id="s2-lifestyle-other-ta" data-i18n-placeholder="s2.q2.other_ph" oninput="s2data.s2_lifestyle_other=this.value"></textarea>
     </div>
     <button class="btn btn-primary" onclick="s2Next(2)" data-i18n="nav.next"></button>
     <button class="btn btn-secondary" style="margin-top:8px" onclick="s2Prev(2)" data-i18n="nav.prev"></button>
@@ -863,9 +893,10 @@
 
   <!-- Q3 -->
   <div id="s2-q3" class="s2-step" style="display:none">
+    <button class="nav-home" onclick="showPage('page-lang')" data-i18n="nav.home"></button>
     <div class="progress-wrap">
-      <div class="progress-label"><span data-i18n="s2.q3.section"></span><span>3 / 6</span></div>
-      <div class="progress-bar"><div class="progress-fill" style="width:50%"></div></div>
+      <div class="progress-label"><span data-i18n="s2.q3.section"></span><span>3 / 11</span></div>
+      <div class="progress-bar"><div class="progress-fill" style="width:27%"></div></div>
     </div>
     <div class="card">
       <div class="q-label">Question 3</div>
@@ -881,11 +912,121 @@
     <button class="btn btn-secondary" style="margin-top:8px" onclick="s2Prev(3)" data-i18n="nav.prev"></button>
   </div>
 
+  <!-- Q3b: 白天體力/精力 -->
+  <div id="s2-q3b" class="s2-step" style="display:none">
+    <button class="nav-home" onclick="showPage('page-lang')" data-i18n="nav.home"></button>
+    <div class="progress-wrap">
+      <div class="progress-label"><span data-i18n="s2.q3b.section"></span><span>4 / 11</span></div>
+      <div class="progress-bar"><div class="progress-fill" style="width:36%"></div></div>
+    </div>
+    <div class="card">
+      <div class="q-label">Question 3+</div>
+      <div class="q-title" data-i18n="s2.q3b.title"></div>
+      <div class="options">
+        <div class="opt" onclick="selectSingle(this,'s2_daytime_energy','Always energized')"><div class="opt-icon">⚡</div><div class="opt-text" data-i18n="s2.q3b.a1"></div></div>
+        <div class="opt" onclick="selectSingle(this,'s2_daytime_energy','Occasional fatigue')"><div class="opt-icon">🙂</div><div class="opt-text" data-i18n="s2.q3b.a2"></div></div>
+        <div class="opt" onclick="selectSingle(this,'s2_daytime_energy','Often tired')"><div class="opt-icon">😔</div><div class="opt-text" data-i18n="s2.q3b.a3"></div></div>
+        <div class="opt" onclick="selectSingle(this,'s2_daytime_energy','Constant exhaustion')"><div class="opt-icon">😩</div><div class="opt-text" data-i18n="s2.q3b.a4"></div></div>
+      </div>
+    </div>
+    <button class="btn btn-primary" onclick="s2Next('3b')" data-i18n="nav.next"></button>
+    <button class="btn btn-secondary" style="margin-top:8px" onclick="s2Prev('3b')" data-i18n="nav.prev"></button>
+  </div>
+
+  <!-- Q3c: 其他生活習慣 -->
+  <div id="s2-q3c" class="s2-step" style="display:none">
+    <button class="nav-home" onclick="showPage('page-lang')" data-i18n="nav.home"></button>
+    <div class="progress-wrap">
+      <div class="progress-label"><span data-i18n="s2.q3c.section"></span><span>5 / 11</span></div>
+      <div class="progress-bar"><div class="progress-fill" style="width:45%"></div></div>
+    </div>
+    <div class="card">
+      <div class="q-label">Question 4</div>
+      <div class="q-title" data-i18n="s2.q3c.title"></div>
+      <div class="q-hint" data-i18n="s2.q3c.hint"></div>
+      <div class="options">
+        <div class="opt" onclick="toggleChip(this,'s2_habits','Alcohol')"><div class="opt-icon">🍺</div><div class="opt-text" data-i18n="s2.q3c.a1"></div></div>
+        <div class="opt" onclick="toggleChip(this,'s2_habits','Smoking')"><div class="opt-icon">🚬</div><div class="opt-text" data-i18n="s2.q3c.a2"></div></div>
+        <div class="opt" onclick="toggleChip(this,'s2_habits','Medications')"><div class="opt-icon">💊</div><div class="opt-text" data-i18n="s2.q3c.a3"></div></div>
+        <div class="opt" onclick="toggleChip(this,'s2_habits','High caffeine')"><div class="opt-icon">☕</div><div class="opt-text" data-i18n="s2.q3c.a4"></div></div>
+        <div class="opt" onclick="toggleChip(this,'s2_habits','None of the above')"><div class="opt-icon">✅</div><div class="opt-text" data-i18n="s2.q3c.a5"></div></div>
+      </div>
+    </div>
+    <button class="btn btn-primary" onclick="s2Next('3c')" data-i18n="nav.next"></button>
+    <button class="btn btn-secondary" style="margin-top:8px" onclick="s2Prev('3c')" data-i18n="nav.prev"></button>
+  </div>
+
+  <!-- Q3d: 是否需要熬夜 -->
+  <div id="s2-q3d" class="s2-step" style="display:none">
+    <button class="nav-home" onclick="showPage('page-lang')" data-i18n="nav.home"></button>
+    <div class="progress-wrap">
+      <div class="progress-label"><span data-i18n="s2.q3d.section"></span><span>6 / 11</span></div>
+      <div class="progress-bar"><div class="progress-fill" style="width:55%"></div></div>
+    </div>
+    <div class="card">
+      <div class="q-label">Question 5</div>
+      <div class="q-title" data-i18n="s2.q3d.title"></div>
+      <div class="options">
+        <div class="opt" onclick="selectSingle(this,'s2_latenight','Rarely')"><div class="opt-icon">😴</div><div class="opt-text" data-i18n="s2.q3d.a1"></div></div>
+        <div class="opt" onclick="selectSingle(this,'s2_latenight','Occasionally')"><div class="opt-icon">🌙</div><div class="opt-text" data-i18n="s2.q3d.a2"></div></div>
+        <div class="opt" onclick="selectSingle(this,'s2_latenight','Often')"><div class="opt-icon">🌑</div><div class="opt-text" data-i18n="s2.q3d.a3"></div></div>
+        <div class="opt" onclick="selectSingle(this,'s2_latenight','Every night')"><div class="opt-icon">💀</div><div class="opt-text" data-i18n="s2.q3d.a4"></div></div>
+      </div>
+    </div>
+    <button class="btn btn-primary" onclick="s2Next('3d')" data-i18n="nav.next"></button>
+    <button class="btn btn-secondary" style="margin-top:8px" onclick="s2Prev('3d')" data-i18n="nav.prev"></button>
+  </div>
+
+  <!-- Q3e: 特殊過敏源 -->
+  <div id="s2-q3e" class="s2-step" style="display:none">
+    <button class="nav-home" onclick="showPage('page-lang')" data-i18n="nav.home"></button>
+    <div class="progress-wrap">
+      <div class="progress-label"><span data-i18n="s2.q3e.section"></span><span>7 / 11</span></div>
+      <div class="progress-bar"><div class="progress-fill" style="width:64%"></div></div>
+    </div>
+    <div class="card">
+      <div class="q-label">Question 6</div>
+      <div class="q-title" data-i18n="s2.q3e.title"></div>
+      <div class="q-hint" data-i18n="s2.q3e.hint"></div>
+      <div class="options">
+        <div class="opt" onclick="toggleChip(this,'s2_allergy','Alcohol allergy')"><div class="opt-icon">🚫🍺</div><div class="opt-text" data-i18n="s2.q3e.a1"></div></div>
+        <div class="opt" onclick="toggleChip(this,'s2_allergy','Mushroom allergy')"><div class="opt-icon">🍄</div><div class="opt-text" data-i18n="s2.q3e.a2"></div></div>
+        <div class="opt" onclick="toggleChip(this,'s2_allergy','Pollen allergy')"><div class="opt-icon">🌼</div><div class="opt-text" data-i18n="s2.q3e.a3"></div></div>
+        <div class="opt" onclick="toggleChip(this,'s2_allergy','No known allergies')"><div class="opt-icon">✅</div><div class="opt-text" data-i18n="s2.q3e.a4"></div></div>
+      </div>
+      <textarea style="margin-top:12px" data-i18n-placeholder="s2.q3e.other_ph" oninput="s2data.s2_allergy_other=this.value"></textarea>
+    </div>
+    <button class="btn btn-primary" onclick="s2Next('3e')" data-i18n="nav.next"></button>
+    <button class="btn btn-secondary" style="margin-top:8px" onclick="s2Prev('3e')" data-i18n="nav.prev"></button>
+  </div>
+
+  <!-- Q3f: 是否服用身心科藥物 -->
+  <div id="s2-q3f" class="s2-step" style="display:none">
+    <button class="nav-home" onclick="showPage('page-lang')" data-i18n="nav.home"></button>
+    <div class="progress-wrap">
+      <div class="progress-label"><span data-i18n="s2.q3f.section"></span><span>8 / 11</span></div>
+      <div class="progress-bar"><div class="progress-fill" style="width:73%"></div></div>
+    </div>
+    <div class="card">
+      <div class="q-label">Question 7</div>
+      <div class="q-title" data-i18n="s2.q3f.title"></div>
+      <div class="options">
+        <div class="opt" onclick="selectSingle(this,'s2_psych_med','No')"><div class="opt-icon">✅</div><div class="opt-text" data-i18n="s2.q3f.a1"></div></div>
+        <div class="opt" onclick="selectSingle(this,'s2_psych_med','Sleeping pills')"><div class="opt-icon">💊</div><div class="opt-text" data-i18n="s2.q3f.a2"></div></div>
+        <div class="opt" onclick="selectSingle(this,'s2_psych_med','Antidepressants')"><div class="opt-icon">🌿</div><div class="opt-text" data-i18n="s2.q3f.a3"></div></div>
+        <div class="opt" onclick="selectSingle(this,'s2_psych_med','Other psych meds')"><div class="opt-icon">🏥</div><div class="opt-text" data-i18n="s2.q3f.a4"></div></div>
+      </div>
+    </div>
+    <button class="btn btn-primary" onclick="s2Next('3f')" data-i18n="nav.next"></button>
+    <button class="btn btn-secondary" style="margin-top:8px" onclick="s2Prev('3f')" data-i18n="nav.prev"></button>
+  </div>
+
   <!-- Q4 -->
   <div id="s2-q4" class="s2-step" style="display:none">
+    <button class="nav-home" onclick="showPage('page-lang')" data-i18n="nav.home"></button>
     <div class="progress-wrap">
-      <div class="progress-label"><span data-i18n="s2.q4.section"></span><span>4 / 6</span></div>
-      <div class="progress-bar"><div class="progress-fill" style="width:67%"></div></div>
+      <div class="progress-label"><span data-i18n="s2.q4.section"></span><span>9 / 11</span></div>
+      <div class="progress-bar"><div class="progress-fill" style="width:82%"></div></div>
     </div>
     <div class="card">
       <div class="q-label">Question 4</div>
@@ -913,9 +1054,10 @@
 
   <!-- Q5 -->
   <div id="s2-q5" class="s2-step" style="display:none">
+    <button class="nav-home" onclick="showPage('page-lang')" data-i18n="nav.home"></button>
     <div class="progress-wrap">
-      <div class="progress-label"><span data-i18n="s2.q5.section"></span><span>5 / 6</span></div>
-      <div class="progress-bar"><div class="progress-fill" style="width:83%"></div></div>
+      <div class="progress-label"><span data-i18n="s2.q5.section"></span><span>10 / 11</span></div>
+      <div class="progress-bar"><div class="progress-fill" style="width:91%"></div></div>
     </div>
     <div class="card">
       <div class="q-label">Question 5</div>
@@ -932,8 +1074,9 @@
 
   <!-- Q6 基本資料 -->
   <div id="s2-q6" class="s2-step" style="display:none">
+    <button class="nav-home" onclick="showPage('page-lang')" data-i18n="nav.home"></button>
     <div class="progress-wrap">
-      <div class="progress-label"><span data-i18n="s2.q6.section"></span><span>6 / 6</span></div>
+      <div class="progress-label"><span data-i18n="s2.q6.section"></span><span>11 / 11</span></div>
       <div class="progress-bar"><div class="progress-fill" style="width:100%"></div></div>
     </div>
     <div class="card">
@@ -989,6 +1132,9 @@
   <div id="result-bundle-wrap"></div>
   <!-- 行動按鈕 -->
   <div class="btn-row" id="result-action-btns"></div>
+  <a href="https://lin.ee/9Kpov7y" target="_blank" style="margin-top:20px;display:block;text-align:center;font-size:16px;font-weight:800;padding:16px 20px;background:linear-gradient(135deg,#7C5C7C,#A67CA6);color:#fff;border-radius:12px;text-decoration:none" id="s2-coupon-btn">
+    🎁 新朋友專屬體驗折價券 $100
+  </a>
   <button class="btn btn-secondary" style="margin-top:10px" onclick="showPage('page-landing')" data-i18n="result.retake"></button>
 </div>
 
@@ -1021,7 +1167,7 @@ let lang = 'zh';
 // ── 翻譯字典 ────────────────────────────────────────────────────
 const T = {
   zh: {
-    'nav.back': '返回', 'nav.next': '繼續 →', 'nav.prev': '← 上一題',
+    'nav.back': '返回', 'nav.next': '繼續 →', 'nav.prev': '← 上一題', 'nav.home': '⌂ 首頁',
 
     'landing.title': '機能性菇菇問卷',
     'landing.subtitle': '填寫問卷，讓我們為您找到最適合的天然機能保健方案 🍄',
@@ -1055,7 +1201,7 @@ const T = {
     's1.q7.a3': '需要再觀察效果', 's1.q7.a4': '目前不考慮',
     's1.q7b.section': '未回購原因', 's1.q7b.title': '不考慮回購的原因為何？', 's1.q7b.hint': '可複選，或直接跳過',
     's1.q7b.r1': '💰 價格考量', 's1.q7b.r2': '🤔 效果不夠明顯', 's1.q7b.r3': '😐 口感 / 氣味問題',
-    's1.q7b.r4': '🔄 找到其他替代品', 's1.q7b.r5': '📦 不需繼續補充', 's1.q7b.r6': '💸 預算考量',
+    's1.q7b.r4': '🔄 找到其他替代品', 's1.q7b.r5': '📦 不需繼續補充',
     's1.q7b.other_ph': '其他原因（選填）',
     's1.q8.section': '推薦意願', 's1.q8.title': '如果要推薦 Mycodrops 給有生活困擾的親友，你會推薦哪一款？',
     's1.q8.no_rec': '不推薦',
@@ -1076,8 +1222,11 @@ const T = {
     's1.q1c.imp1': '⚡ 精力提升', 's1.q1c.imp2': '😴 睡眠改善', 's1.q1c.imp3': '🧠 專注力提升',
     's1.q1c.imp4': '🌿 壓力減輕', 's1.q1c.imp5': '😊 情緒穩定', 's1.q1c.imp6': '🏋️ 運動表現',
     's1.q1c.imp7': '🛡️ 免疫感受', 's1.q1c.imp8': '🤔 尚未明顯感受',
-    's1.q1c.t1': '早晨起床後', 's1.q1c.t2': '睡前', 's1.q1c.t3': '餐前', 's1.q1c.t4': '餐後', 's1.q1c.t5': '運動前後',
-    's1.q1c.d1': '1 滴', 's1.q1c.d2': '2 滴', 's1.q1c.d3': '3 滴以上', 's1.q1c.d4': '按建議量',
+    's1.q1c.t1': '白天', 's1.q1c.t2': '晚上', 's1.q1c.t3': '工作前', 's1.q1c.t4': '運動前後',
+    's1.q1c.timing_other_ph': '其他時機（選填）',
+    's1.q1c.d1': '1 滴管 (1ml)', 's1.q1c.d2': '2 滴管 (2ml)', 's1.q1c.d3': '3 滴管以上 (3ml+)', 's1.q1c.d4': '按建議量',
+    's1.q1c.dosage_other_ph': '其他用量（選填）',
+    's1.q1b.all': '🌟 都滿喜歡的',
     's1.q1c.m1': '直接攝取', 's1.q1c.m2': '加入溫水', 's1.q1c.m3': '加入咖啡或牛奶', 's1.q1c.m4': '加入手搖飲', 's1.q1c.m5': '加入茶飲',
     's1.q9.section': '基本資料', 's1.q9.label': '最後一步', 's1.q9.title': '讓我們更了解您（匿名）',
     's1.submit': '送出問卷 🍄',
@@ -1102,6 +1251,21 @@ const T = {
     's2.q4.other_ph': '其他期待的改變？（選填）',
     's2.q5.section': '保健習慣', 's2.q5.title': '你目前有在使用保健品嗎？',
     's2.q5.a1': '有，規律使用（每天）', 's2.q5.a2': '偶爾補充', 's2.q5.a3': '沒有，是第一次考慮',
+    's2.q2.a5': '其他', 's2.q2.other_ph': '請填寫您的生活型態（選填）',
+    's2.q3b.section': '白天精力', 's2.q3b.title': '您平時白天的體力和精力狀況如何？',
+    's2.q3b.a1': '精力充沛，完全沒問題', 's2.q3b.a2': '偶爾會感到疲憊',
+    's2.q3b.a3': '經常提不起勁、容易疲勞', 's2.q3b.a4': '幾乎每天都感到疲憊不堪',
+    's2.q3c.section': '生活習慣', 's2.q3c.title': '您目前有哪些生活習慣？', 's2.q3c.hint': '可複選',
+    's2.q3c.a1': '飲酒', 's2.q3c.a2': '抽煙', 's2.q3c.a3': '服用其他藥物',
+    's2.q3c.a4': '高咖啡因攝取', 's2.q3c.a5': '以上皆無',
+    's2.q3d.section': '作息習慣', 's2.q3d.title': '您的工作或課業需要熬夜嗎？',
+    's2.q3d.a1': '幾乎不熬夜', 's2.q3d.a2': '偶爾需要熬夜',
+    's2.q3d.a3': '經常需要熬夜', 's2.q3d.a4': '幾乎每天熬夜',
+    's2.q3e.section': '過敏資訊', 's2.q3e.title': '您有以下過敏狀況嗎？', 's2.q3e.hint': '可複選',
+    's2.q3e.a1': '酒精過敏', 's2.q3e.a2': '菇類過敏', 's2.q3e.a3': '花粉過敏', 's2.q3e.a4': '無已知過敏',
+    's2.q3e.other_ph': '其他過敏（請填寫）',
+    's2.q3f.section': '用藥資訊', 's2.q3f.title': '您目前是否有服用身心科相關藥物？',
+    's2.q3f.a1': '沒有', 's2.q3f.a2': '安眠藥', 's2.q3f.a3': '抗憂鬱藥', 's2.q3f.a4': '其他身心科藥物',
     's2.q6.section': '基本資料',
     's2.submit': '看看我適合哪種菇 🍄',
 
@@ -1174,7 +1338,7 @@ const T = {
   },
 
   en: {
-    'nav.back': 'Back', 'nav.next': 'Continue →', 'nav.prev': '← Previous',
+    'nav.back': 'Back', 'nav.next': 'Continue →', 'nav.prev': '← Previous', 'nav.home': '⌂ Home',
 
     'landing.title': 'Functional Mushroom Survey',
     'landing.subtitle': "Answer a few quick questions and we'll find the right mushroom for you 🍄",
@@ -1208,7 +1372,7 @@ const T = {
     's1.q7.a3': 'Need to observe more results', 's1.q7.a4': 'Not likely at this time',
     's1.q7b.section': 'Non-repurchase', 's1.q7b.title': 'What might stop you from repurchasing?', 's1.q7b.hint': 'Select all that apply, or skip',
     's1.q7b.r1': '💰 Price', 's1.q7b.r2': '🤔 Effect not obvious enough', 's1.q7b.r3': '😐 Taste / smell',
-    's1.q7b.r4': '🔄 Found an alternative', 's1.q7b.r5': '📦 No longer need it', 's1.q7b.r6': '💸 Budget',
+    's1.q7b.r4': '🔄 Found an alternative', 's1.q7b.r5': '📦 No longer need it',
     's1.q7b.other_ph': 'Other reason (optional)',
     's1.q8.section': 'Recommendation',
     's1.q8.title': 'If you were to recommend Mycodrops to a friend with health concerns, which one would you choose?',
@@ -1230,8 +1394,11 @@ const T = {
     's1.q1c.imp1': '⚡ More energy', 's1.q1c.imp2': '😴 Better sleep', 's1.q1c.imp3': '🧠 Better focus',
     's1.q1c.imp4': '🌿 Less stress', 's1.q1c.imp5': '😊 Mood stability', 's1.q1c.imp6': '🏋️ Athletic performance',
     's1.q1c.imp7': '🛡️ Immunity', 's1.q1c.imp8': '🤔 Nothing noticeable yet',
-    's1.q1c.t1': 'Morning', 's1.q1c.t2': 'Before bed', 's1.q1c.t3': 'Before meals', 's1.q1c.t4': 'After meals', 's1.q1c.t5': 'Before/after exercise',
-    's1.q1c.d1': '1 drop', 's1.q1c.d2': '2 drops', 's1.q1c.d3': '3+ drops', 's1.q1c.d4': 'As recommended',
+    's1.q1c.t1': 'Daytime', 's1.q1c.t2': 'Evening', 's1.q1c.t3': 'Before work', 's1.q1c.t4': 'Before/after exercise',
+    's1.q1c.timing_other_ph': 'Other timing (optional)',
+    's1.q1c.d1': '1 dropper (1ml)', 's1.q1c.d2': '2 droppers (2ml)', 's1.q1c.d3': '3+ droppers (3ml+)', 's1.q1c.d4': 'As recommended',
+    's1.q1c.dosage_other_ph': 'Other dosage (optional)',
+    's1.q1b.all': '🌟 Love them all',
     's1.q1c.m1': 'Directly', 's1.q1c.m2': 'In warm water', 's1.q1c.m3': 'In coffee or milk', 's1.q1c.m4': 'In a drink', 's1.q1c.m5': 'In tea',
     's1.q9.section': 'About You', 's1.q9.label': 'Last step', 's1.q9.title': 'Tell us a bit about yourself (anonymous)',
     's1.submit': 'Submit Feedback 🍄',
@@ -1256,6 +1423,21 @@ const T = {
     's2.q4.other_ph': 'Other goals you\'re hoping for... (optional)',
     's2.q5.section': 'Supplements', 's2.q5.title': 'Do you currently take health supplements?',
     's2.q5.a1': 'Yes, regularly (daily)', 's2.q5.a2': 'Occasionally', 's2.q5.a3': 'No — first time considering it',
+    's2.q2.a5': 'Other', 's2.q2.other_ph': 'Please describe your lifestyle (optional)',
+    's2.q3b.section': 'Daytime Energy', 's2.q3b.title': 'How is your energy and stamina during the day?',
+    's2.q3b.a1': 'Energized and active', 's2.q3b.a2': 'Occasionally tired',
+    's2.q3b.a3': 'Often low energy', 's2.q3b.a4': 'Exhausted almost every day',
+    's2.q3c.section': 'Lifestyle Habits', 's2.q3c.title': 'Which of these apply to your current lifestyle?', 's2.q3c.hint': 'Select all that apply',
+    's2.q3c.a1': 'Alcohol', 's2.q3c.a2': 'Smoking', 's2.q3c.a3': 'Medications',
+    's2.q3c.a4': 'High caffeine intake', 's2.q3c.a5': 'None of the above',
+    's2.q3d.section': 'Sleep Habits', 's2.q3d.title': 'Do your work or studies require you to stay up late?',
+    's2.q3d.a1': 'Rarely', 's2.q3d.a2': 'Occasionally',
+    's2.q3d.a3': 'Often', 's2.q3d.a4': 'Almost every night',
+    's2.q3e.section': 'Allergies', 's2.q3e.title': 'Do you have any known allergies?', 's2.q3e.hint': 'Select all that apply',
+    's2.q3e.a1': 'Alcohol allergy', 's2.q3e.a2': 'Mushroom allergy', 's2.q3e.a3': 'Pollen allergy', 's2.q3e.a4': 'No known allergies',
+    's2.q3e.other_ph': 'Other allergies (please specify)',
+    's2.q3f.section': 'Medications', 's2.q3f.title': 'Are you currently taking any psychiatric or sleep medications?',
+    's2.q3f.a1': 'No', 's2.q3f.a2': 'Sleeping pills', 's2.q3f.a3': 'Antidepressants', 's2.q3f.a4': 'Other psychiatric medication',
     's2.q6.section': 'About You',
     's2.submit': 'See My Mushroom Match 🍄',
 
@@ -1437,8 +1619,20 @@ function showS1Step(n) {
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
+function hasSelection(stepId) {
+  const el = document.getElementById(stepId);
+  if (!el) return true; // unknown step, skip
+  // If step has no selectable options at all, skip validation
+  const hasAnyOpt = el.querySelector('.opt, .opt-chip');
+  if (!hasAnyOpt) return true;
+  const hasOpt = el.querySelector('.opt.selected, .opt-chip.selected');
+  return !!hasOpt;
+}
+
 function s1Next(c) {
+  const vMsg = lang === 'zh' ? '請先做出選擇再繼續' : 'Please make a selection before continuing';
   if (c === 1) {
+    if (!hasSelection('s1-q1')) { alert(vMsg); return; }
     const products = s1Multi.s1_product || [];
     productDetailList = products.filter(p => PRODUCT_DETAIL_META[p]);
     if (products.length >= 2) {
@@ -1450,13 +1644,19 @@ function s1Next(c) {
       showS1Step(2);
     }
   } else if (c === '1b') {
+    if (!hasSelection('s1-q1b')) { alert(vMsg); return; }
     productDetailList = (s1Multi.s1_product || []).filter(p => PRODUCT_DETAIL_META[p]);
     if (productDetailList.length > 0) {
       showProductDetailStep(0);
     } else {
       showS1Step(2);
     }
+  } else if (c === 7) {
+    if (!hasSelection('s1-q7')) { alert(vMsg); return; }
+    showS1Step('7b');
   } else {
+    const stepId = 's1-q' + c;
+    if (!hasSelection(stepId)) { alert(vMsg); return; }
     showS1Step(c + 1);
   }
 }
@@ -1502,6 +1702,16 @@ function populateQ1bOptions() {
     };
     opts.appendChild(div);
   });
+  // 加上「都滿喜歡的」選項
+  const allDiv = document.createElement('div');
+  allDiv.className = 'opt';
+  allDiv.innerHTML = `<div class="opt-icon">🌟</div><div><div class="opt-text">${t('s1.q1b.all')}</div></div>`;
+  allDiv.onclick = function() {
+    opts.querySelectorAll('.opt').forEach(o => o.classList.remove('selected'));
+    allDiv.classList.add('selected');
+    s1data.s1_favorite = 'All / 都滿喜歡的';
+  };
+  opts.appendChild(allDiv);
 }
 
 // ── Product Detail Step (Q1c) ─────────────────────────────────
@@ -1538,24 +1748,29 @@ function populateProductDetail(productName) {
     impOpts.appendChild(chip);
   });
 
-  // Timing options (single select)
+  // Timing options (multi-select chips)
   const timingOpts = document.getElementById('s1-q1c-timing-opts');
   timingOpts.innerHTML = '';
-  const timingValues = ['Morning','Before bed','Before meals','After meals','Before/after exercise'];
-  const timingKeys   = ['s1.q1c.t1','s1.q1c.t2','s1.q1c.t3','s1.q1c.t4','s1.q1c.t5'];
-  const savedTiming  = s1data[k + '_timing'] || '';
+  const timingValues = ['Daytime','Evening','Before work','Before/after exercise'];
+  const timingKeys   = ['s1.q1c.t1','s1.q1c.t2','s1.q1c.t3','s1.q1c.t4'];
+  const savedTiming  = s1Multi[k + '_timing'] || [];
   timingValues.forEach((v, i) => {
-    const opt = document.createElement('div');
-    opt.className = 'opt' + (savedTiming === v ? ' selected' : '');
-    opt.innerHTML = '<div class="opt-text">' + t(timingKeys[i]) + '</div>';
-    opt.onclick = () => { timingOpts.querySelectorAll('.opt').forEach(o => o.classList.remove('selected')); opt.classList.add('selected'); s1data[k + '_timing'] = v; };
-    timingOpts.appendChild(opt);
+    const chip = document.createElement('div');
+    chip.className = 'opt-chip' + (savedTiming.includes(v) ? ' selected' : '');
+    chip.innerHTML = '<span>' + t(timingKeys[i]) + '</span>';
+    chip.onclick = () => toggleChip(chip, k + '_timing', v);
+    timingOpts.appendChild(chip);
   });
+
+  // Timing other textarea
+  const timingOtherTA = document.getElementById('s1-q1c-timing-other');
+  timingOtherTA.value = s1data[k + '_timing_other'] || '';
+  timingOtherTA.oninput = () => { s1data[k + '_timing_other'] = timingOtherTA.value; };
 
   // Dosage options (single select)
   const dosageOpts = document.getElementById('s1-q1c-dosage-opts');
   dosageOpts.innerHTML = '';
-  const dosageValues = ['1 drop','2 drops','3+ drops','As recommended'];
+  const dosageValues = ['1 dropper (1ml)','2 droppers (2ml)','3+ droppers (3ml+)','As recommended'];
   const dosageKeys   = ['s1.q1c.d1','s1.q1c.d2','s1.q1c.d3','s1.q1c.d4'];
   const savedDosage  = s1data[k + '_dosage'] || '';
   dosageValues.forEach((v, i) => {
@@ -1565,6 +1780,11 @@ function populateProductDetail(productName) {
     opt.onclick = () => { dosageOpts.querySelectorAll('.opt').forEach(o => o.classList.remove('selected')); opt.classList.add('selected'); s1data[k + '_dosage'] = v; };
     dosageOpts.appendChild(opt);
   });
+
+  // Dosage other textarea
+  const dosageOtherTA = document.getElementById('s1-q1c-dosage-other');
+  dosageOtherTA.value = s1data[k + '_dosage_other'] || '';
+  dosageOtherTA.oninput = () => { s1data[k + '_dosage_other'] = dosageOtherTA.value; };
 
   // Method options (multi-select chips)
   const methodOpts = document.getElementById('s1-q1c-method-opts');
@@ -1596,6 +1816,13 @@ function showProductDetailStep(index) {
 }
 
 function s1NextProductDetail() {
+  const vMsg = lang === 'zh' ? '請先做出選擇再繼續' : 'Please make a selection before continuing';
+  // Validate all 4 sections
+  const impSel = document.getElementById('s1-q1c-improvement-opts') && document.getElementById('s1-q1c-improvement-opts').querySelector('.opt-chip.selected');
+  const timSel = document.getElementById('s1-q1c-timing-opts') && document.getElementById('s1-q1c-timing-opts').querySelector('.opt-chip.selected');
+  const dosSel = document.getElementById('s1-q1c-dosage-opts') && document.getElementById('s1-q1c-dosage-opts').querySelector('.opt.selected');
+  const metSel = document.getElementById('s1-q1c-method-opts') && document.getElementById('s1-q1c-method-opts').querySelector('.opt-chip.selected');
+  if (!impSel || !timSel || !dosSel || !metSel) { alert(vMsg); return; }
   if (productDetailIndex < productDetailList.length - 1) {
     showProductDetailStep(productDetailIndex + 1);
   } else {
@@ -1624,8 +1851,26 @@ function showS2Step(n) {
   if (el) el.style.display = 'block';
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
-function s2Next(c) { showS2Step(c + 1); }
-function s2Prev(c) { c > 1 ? showS2Step(c - 1) : showPage('page-landing'); }
+function s2Next(c) {
+  const vMsg = lang === 'zh' ? '請先做出選擇再繼續' : 'Please make a selection before continuing';
+  // Validate current step before advancing
+  if (c !== 6) {
+    // For Q3e (allergy) and Q3c (habits) - they are multi-select but "None of the above" is valid
+    const stepEl = document.getElementById('s2-q' + c);
+    if (stepEl && !stepEl.querySelector('.opt.selected, .opt-chip.selected')) {
+      alert(vMsg); return;
+    }
+  }
+  const order = [1,2,3,'3b','3c','3d','3e','3f',4,5,6];
+  const idx = order.indexOf(c);
+  if (idx >= 0 && idx < order.length - 1) showS2Step(order[idx+1]);
+}
+function s2Prev(c) {
+  const order = [1,2,3,'3b','3c','3d','3e','3f',4,5,6];
+  const idx = order.indexOf(c);
+  if (idx > 0) showS2Step(order[idx-1]);
+  else showPage('page-landing');
+}
 
 // ── 選項互動 ──────────────────────────────────────────────────
 function selectSingle(el, key, value) {
@@ -1708,6 +1953,14 @@ function submitS2() {
   if (goals.includes('Better sleep'))  reishi += 3;
   if (goals.includes('Less stress'))   { reishi += 2; lion += 1; }
 
+  // Q3b 白天體力（→ Cordyceps）
+  if (d.s2_daytime_energy === 'Often tired')         cord += 2;
+  if (d.s2_daytime_energy === 'Constant exhaustion') cord += 3;
+
+  // Q3d 熬夜（→ Reishi for recovery）
+  if (d.s2_latenight === 'Often')        reishi += 2;
+  if (d.s2_latenight === 'Every night') reishi += 3;
+
   const total = (cord + lion + reishi) || 1;
   const pC = Math.round(cord / total * 100);
   const pL = Math.round(lion / total * 100);
@@ -1737,7 +1990,8 @@ const SHROOM_META = {
     benefits: ['🔋','shroom.cord.b1','💪','shroom.cord.b2','🛡️','shroom.cord.b3','⚡','shroom.cord.b4'],
     usageKey: 'shroom.cord.usage', audienceKey: 'shroom.cord.audience',
     btnClass: 'btn-cordyceps', linkKey: 'buy_cord', ctaKey: 'cta.buy.cord', icon: '🟠',
-    colorVar: 'var(--cordyceps)'
+    colorVar: 'var(--cordyceps)',
+    igLink: 'https://www.instagram.com/p/DU2kNAkCEpd/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA=='
   },
   lionsmane: {
     img: 'images/lionsmane.png', nameEn: "Lion's Mane · Hericium erinaceus",
@@ -1745,7 +1999,8 @@ const SHROOM_META = {
     benefits: ['🧠','shroom.lion.b1','📚','shroom.lion.b2','🌈','shroom.lion.b3','💼','shroom.lion.b4'],
     usageKey: 'shroom.lion.usage', audienceKey: 'shroom.lion.audience',
     btnClass: 'btn-lionsmane', linkKey: 'buy_lion', ctaKey: 'cta.buy.lion', icon: '🔵',
-    colorVar: 'var(--lionsmane)'
+    colorVar: 'var(--lionsmane)',
+    igLink: 'https://www.instagram.com/p/DRNF2ABE_Dn/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA=='
   },
   reishi: {
     img: 'images/reishi.png', nameEn: 'Reishi · Ganoderma lucidum',
@@ -1753,7 +2008,8 @@ const SHROOM_META = {
     benefits: ['🌙','shroom.reishi.b1','🌿','shroom.reishi.b2','😊','shroom.reishi.b3','🛡️','shroom.reishi.b4'],
     usageKey: 'shroom.reishi.usage', audienceKey: 'shroom.reishi.audience',
     btnClass: 'btn-reishi', linkKey: 'buy_reishi', ctaKey: 'cta.buy.reishi', icon: '🔴',
-    colorVar: 'var(--reishi)'
+    colorVar: 'var(--reishi)',
+    igLink: 'https://www.instagram.com/p/DSXX-M9k04h/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA=='
   }
 };
 
@@ -1775,6 +2031,7 @@ function buildResultPage(cord, lion, reishi) {
     benefitPairs.push(`<li>${m.benefits[i]} <span>${t(m.benefits[i+1])}</span></li>`);
   }
   primaryWrap.innerHTML = `
+    <a href="${m.igLink}" target="_blank" style="display:block;text-decoration:none">
     <div class="result-photo-wrap" style="background:${m.colorVar}">
       <img src="${m.img}" alt="${t(m.nameKey)}" class="result-photo" onerror="this.style.display='none'">
       <div class="result-photo-overlay">
@@ -1783,6 +2040,7 @@ function buildResultPage(cord, lion, reishi) {
         <div class="result-photo-tag">${t(m.tagKey)}</div>
       </div>
     </div>
+    </a>
     <p class="result-match">${t('result.match_prefix')}<strong>${t(m.nameKey)} (${primary.pct}%)</strong></p>
     <div class="card">
       <div class="section-title">${t('result.why')}</div>
@@ -1841,7 +2099,7 @@ function buildResultPage(cord, lion, reishi) {
   // ── 行動按鈕 ──
   const actionBtns = document.getElementById('result-action-btns');
   actionBtns.innerHTML = `
-    <a href="${LINKS.line}" target="_blank" class="btn btn-line">${t('cta.line')}</a>
+    <a href="${LINKS.line}" target="_blank" class="btn btn-line">加入LINE官方帳號，跟我們聊聊</a>
     <a href="${LINKS.workshop}" target="_blank" class="btn btn-workshop">${t('cta.workshop')}</a>
   `;
 
